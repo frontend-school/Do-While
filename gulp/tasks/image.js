@@ -1,6 +1,5 @@
 var gulp = require('gulp'),
     spritesmith = require('gulp.spritesmith'),
-    liveReload = require('gulp-livereload'),
     del = require('del'),
     path = require('path'),
     config = require('../config'),
@@ -12,8 +11,7 @@ gulp.task('build:img', ['copy:img:pictures', 'build:img:icons']);
 
 gulp.task('copy:img:pictures', ['clean:img:pictures'], function () {
     return gulp.src(config.patterns.src.img.all)
-        .pipe(gulp.dest(config.paths.dist.img._root))
-        .pipe(liveReload());
+        .pipe(gulp.dest(config.paths.dist.img._root));
 });
 
 gulp.task('clean:img:pictures', function (onDone) {

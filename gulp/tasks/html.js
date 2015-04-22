@@ -1,9 +1,9 @@
 var gulp = require('gulp'),
-    liveReload = require('gulp-livereload'),
+    browserSync = require('browser-sync'),
     fileInclude = require('gulp-file-include'),
     del = require('del'),
     config = require('../config'),
-    errorDebug = require('../lib/error-debug');;
+    errorDebug = require('../lib/error-debug');
 
 gulp.task('build:html', ['build:html:pages', 'build:html:views']);
 
@@ -13,7 +13,7 @@ gulp.task('build:html:pages', ['clean:html:pages'], function () {
         .pipe(fileInclude())
         .on('error', errorDebug.errorHandler)
         .pipe(gulp.dest(config.paths.dist.html.pages))
-        .pipe(liveReload());
+        .pipe(browserSync.reload({stream:true}));
 });
 
 gulp.task('clean:html:pages', function (onDone) {
@@ -24,7 +24,7 @@ gulp.task('clean:html:pages', function (onDone) {
 gulp.task('build:html:views', ['clean:html:views'], function () {
     return gulp.src(config.patterns.src.html.views)
         .pipe(gulp.dest(config.paths.dist.html.views))
-        .pipe(liveReload());
+        .pipe(browserSync.reload({stream:true}));
 });
 
 gulp.task('clean:html:views', function (onDone) {

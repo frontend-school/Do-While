@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     del = require('del'),
     sass = require('gulp-sass'),
-    liveReload = require('gulp-livereload'),
+    browserSync = require('browser-sync'),
     path = require('path'),
     config = require('../config'),
     errorDebug = require('../lib/error-debug');
@@ -10,7 +10,7 @@ function buildScss() {
     return gulp.src(config.paths.src.scss.main)
         .pipe(sass({errLogToConsole: true}))
         .pipe(gulp.dest(config.paths.dist.css))
-        .pipe(liveReload());
+        .pipe(browserSync.reload({stream:true}));
 }
 
 gulp.task('build:scss', ['build:img:icons', 'clean:css'], function () {
