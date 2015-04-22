@@ -1,9 +1,11 @@
 var gulp = require('gulp'),
-    liveReload = require('gulp-livereload'),
+    browserSync = require('browser-sync'),
     config = require('../config');
 
 gulp.task('watch', ['build'], function () {
-    liveReload.listen();
+    browserSync.init({
+        proxy: "localhost:3000"
+    });
     gulp.watch([
             config.patterns.src.html.pages,
             config.patterns.src.html.pageComponents
