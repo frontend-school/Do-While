@@ -1,0 +1,53 @@
+<li class="list-item task-item">
+
+    <div class="task-item__checkbox checkbox">
+        <input class="checkbox__control" id="@@id" type="checkbox"/>
+        <label class="" for="@@id"></label>
+    </div>
+
+    <div class="task-item__info">
+        <span class="task-item__name">
+            @@title
+        </span>
+
+        @@if (info_label) {
+        <span class="task-item__label task-item__label_@@info_label_mod">
+            @@if (project_color) {
+            <i class="badge badge_circle @@project_color"> </i>
+            }
+            @@info_label
+        </span>
+        }
+    </div>
+
+    <div class="task-item__notification">
+
+        @@if (notification) {
+        <span class="task-item__label task-item__label_notification">
+            @@notification
+        </span>
+        }
+
+        @@if (access_time) {
+        <span class="task-item__label task-item__label_access-time">
+            @@access_time
+        </span>
+        }
+    </div>
+
+    <div class="task-item__buttons task-item__buttons@@buttons_mod">
+        <button class="button color_green task-item__edit">
+            <i class="icon icon_pencil">
+            </i>
+            <br/>
+            edit
+        </button>
+
+        <button class="button color_blue task-item__start">
+            <i class="icon icon_triangle">
+            </i>
+            <br/>
+            start
+        </button>
+    </div>
+</li>

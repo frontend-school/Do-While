@@ -1,0 +1,20 @@
+@import "vars";
+@import "mixins";
+
+@font-face {
+  font-family: EncodeSansWide;
+  font-weight: $font-weight-regular;
+  src: url('#{$fonts-root}/EncodeSansWide-Regular.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: EncodeSansWide;
+  font-weight: $font-weight-semi-bold;
+  src: url('#{$fonts-root}/EncodeSansWide-SemiBold.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: EncodeSansWide;
+  font-weight: $font-weight-bold;
+  src: url('#{$fonts-root}/EncodeSansWide-Bold.ttf') format('truetype')
+}

@@ -1,0 +1,26 @@
+// branding colors
+$color-red: #E74C3C;
+$color-green: #1ABC9C;
+$color-blue: #3799D7;
+$color-yellow: #F0C33C;
+$color-orange: #E77A35;
+$color-violet: #9E54B2;
+
+$colors: (
+        red: $color-red,
+        green: $color-green,
+        blue: $color-blue,
+        yellow: $color-yellow,
+        orange: $color-orange,
+        violet: $color-violet
+);
+
+$hover-color: rgba(170,180,190, .5);
+
+// gray scale
+$gray-scale-0: #FFF;
+$gray-scale-1: #F1F3F6;
+$gray-scale-2: #D3DBE3;
+$gray-scale-3: #B9C1C9;
+$gray-scale-4: #ABB4BE;
+$gray-scale-5: #57626B;

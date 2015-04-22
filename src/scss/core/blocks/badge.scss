@@ -1,0 +1,10 @@
+.badge {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+
+  &_circle {
+    border: 0;
+    border-radius: 50%;
+  }
+}

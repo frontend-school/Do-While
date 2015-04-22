@@ -1,0 +1,13 @@
+body {
+  background-color: $gray-scale-1;
+  min-width: $mobile-min-width;
+  overflow-x: hidden;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+}

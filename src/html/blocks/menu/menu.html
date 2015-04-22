@@ -1,0 +1,35 @@
+<nav class="menu page__menu menu_@@mods">
+    <div class="list action-list">
+        <a href="#" class="list-item list-item_small menu__settings">
+            Settings
+        </a>
+
+        <a href="/task-list.html" class="list-item menu__today">
+            today
+            <div class="badge-group">
+                <i class="badge badge_circle color_yellow"></i>
+                <i class="badge badge_circle color_red"></i>
+                <i class="badge badge_circle color_green"></i>
+            </div>
+        </a>
+
+        <a href="/week-task-list.html" class="list-item menu__next-seven-days">
+            next 7 days
+        </a>
+    </div>
+
+    <div class="separator"> projects</div>
+
+    <div class="list project-list">
+        <a href="#" class="list-item list-item_small menu__create-project">
+            Create new..
+        </a>
+        @@include('./project-list-item.html', { "project" : "education", "color": "green", "count" : "8","href" : "#" })
+        @@include('./project-list-item.html', { "project" : "home", "color": "red", "count" : "3", "href" : "#" })
+        @@include('./project-list-item.html', { "project" : "work", "color": "blue", "count" : "2", "href" : "/work-task-list.html" })
+        @@include('./project-list-item.html', { "project" : "kids", "color": "yellow", "count" : "8", "href" : "#" })
+        @@include('./project-list-item.html', { "project" : "study", "color": "orange", "count" : "8", "href" : "#" })
+        @@include('./project-list-item.html', { "project" : "health", "color": "violet", "count" : "7", "href" : "#" })
+    </div>
+
+</nav>

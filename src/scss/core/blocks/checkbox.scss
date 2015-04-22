@@ -1,0 +1,29 @@
+.checkbox {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  input[type='checkbox'] {
+    display: none;
+
+    +label {
+      cursor: pointer;
+
+      &:before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        @extend .icon;
+        @include retina-sprite($icon-check-box-group);
+      }
+    }
+
+    &:checked {
+      +label {
+        &:before {
+          @include retina-sprite($icon-check-box-checked-group);
+        }
+      }
+    }
+  }
+}

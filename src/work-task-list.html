@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    @@include('./html/_head.html')
+</head>
+<body>
+<div class="page">
+    @@include('./html/blocks/menu/menu.html', {"mods" : "closed"})
+
+    <div class="page__main">
+        @@include('./html/blocks/header.html', {"color" : "blue", "title" : "work", "title_icon": true})
+
+        <div class="page__task-list">
+            @@include('./html/pages/project/task-list.html')
+        </div>
+
+        <div class="page__main-overlap">
+        </div>
+    </div>
+</div>
+</body>
+</html>

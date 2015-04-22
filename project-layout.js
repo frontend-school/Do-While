@@ -1,54 +1,91 @@
-var deepAllOfType = function (root, ext) {
-    if (typeof ext === 'undefined')
-        ext = '*';
-    return root + '/**/*.' + ext;
-};
+var glob = require('./lib/glob'),
+    Layout = require('./lib/layout');
 
-var allOfType = function (root, ext) {
-    if (typeof ext === 'undefined')
-        ext = '*';
-    return root + '/*.' + ext;
-};
-
-var paths = {
+var paths = new Layout({
     src: {
-        _root: 'src',
-        scss: 'src/scss',
-        scss_main: 'src/scss/styles.scss',
-        js: 'src/js',
-        img: 'src/img'
+        scss: {
+            main: 'styles.scss',
+            core: 'core'
+        },
+        js: 'js',
+        img: 'img',
+        fonts: 'fonts',
+        html: {
+            _root: '/',
+            pages: '',
+            components: 'html'
+        }
     },
     dist: {
-        _root: 'dist',
-        html: 'dist',
-        js: 'dist/js',
-        css: 'dist/css',
-        img: 'dist/img',
-        vendor: 'dist/vendor'
+        html: '',
+        js: 'js',
+        css: 'css',
+        img: {
+            icons: 'icons.png',
+            retinaIcons: 'icons@2x.png'
+        },
+        fonts: 'fonts',
+        vendor: {
+            js: 'js',
+            css: 'css'
+        }
     },
-    bower: {
-        _root: "bower_components"
-    }
-};
+    bower: 'bower_components'
+});
 
-var patterns = {
+var patterns = new Layout({
     src: {
-        html: allOfType(paths.src._root, 'html'),
-        js: deepAllOfType(paths.src.js, 'js'),
-        scss: deepAllOfType(paths.src.scss, 'scss'),
-        img: deepAllOfType(paths.src.img)
+        html: {
+            _root: '/',
+            all: glob(['/*', '/html/**/*'], 'html'),
+            pages: glob.allOfType('html')
+        },
+        js: {
+            all: glob.deepAllOfType('js')
+        },
+        scss: {
+            all: glob.deepAllOfType('scss')
+        },
+        img: {
+            icons: {
+                all: glob.allOfType('png'),
+                retina: glob('/*@2x', 'png')
+            },
+            all: glob.allOfType()
+        },
+        fonts: {
+            all: glob.deepAllOfType()
+        }
     },
     bower: {
-        js: paths.bower._root + '/*/dist/*.js'
+        _root: paths.bower,
+        js: glob(['/*/dist/*','/*/dest/*', '/*/dist/js/*'], 'js'),
+        css: glob(['/*/*', '/*/css/*', '/*/dist/*','/*/dest/*', '/*/dist/css/*'], 'css')
     },
     dist: {
-        html: allOfType(paths.dist.html),
-        js: deepAllOfType(paths.dist.js),
-        css: deepAllOfType(paths.dist.css),
-        img: deepAllOfType(paths.dist.img),
-        vendor: deepAllOfType(paths.dist.vendor)
+        html: {
+            _root: '/',
+            all: glob.allOfType()
+        },
+        js: {all: glob.deepAllOfType()},
+        css: {all: glob.deepAllOfType()},
+        img: {
+            icons: glob('/icons*','png'),
+            pictures: [glob.deepAllOfType(), glob('/icons*','png').exclude()],
+            all: glob.deepAllOfType()
+        },
+        fonts: {all: glob.deepAllOfType()},
+        vendor: {
+            js: {
+                all: glob.deepAllOfType('js')
+            },
+            css: {
+                all: glob.deepAllOfType('css')
+            },
+            all: glob.deepAllOfType()
+        }
     }
-};
+});
 
 module.exports = {
     paths: paths,

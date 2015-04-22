@@ -1,0 +1,57 @@
+.week-calendar {
+  display: table;
+  box-sizing: border-box;
+  width: 100%;
+  height: $header-size;
+  @include colorize-normal($gray-scale-5, $gray-scale-0);
+
+  text-align: center;
+
+  &-day {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    text-transform: uppercase;
+
+    width: (80% / 7);
+
+    //region elements
+
+    &__number, &__text {
+      display: block;
+      padding-top: 4px;
+    }
+
+    &__number {
+      @include font-regular(15px);
+      color: $gray-scale-5;
+    }
+
+    &__text {
+      @include font-bold(7px);
+      color: $gray-scale-3;
+    }
+
+    &_today {
+      .week-calendar-day {
+        &__number, &__text {
+          color: $color-blue;
+        }
+      }
+      &.week-calendar-day {
+        &:after {
+          content: '';
+          position: absolute;
+          left: 10%;
+          bottom: 0;
+          width: 80%;
+          height: 5px;
+          background-color: $color-blue;
+        }
+      }
+    }
+    //endregion
+
+  }
+}

@@ -1,0 +1,5 @@
+@each $color-name, $color in $colors {
+  .color_#{$color-name} {
+    @include colorize-normal($gray-scale-0, $color);
+  }
+}
