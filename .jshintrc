@@ -3,7 +3,6 @@
   "eqeqeq": true,
   "eqnull": true,
   "latedef": true,
-  "onevar": true,
   "noarg": true,
   "node": true,
   "undef": true,
