@@ -22,6 +22,8 @@ gulp.task('clean:html:pages', function (onDone) {
 
 gulp.task('build:html:markup', ['clean:html:markup'], function () {
     return gulp.src(config.patterns.src.html.markup)
+        .pipe(fileInclude())
+        .on('error', errorDebug.errorHandler)
         .pipe(gulp.dest(config.paths.dist.html.markup))
         .pipe(liveReload());
 });
