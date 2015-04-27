@@ -9,7 +9,7 @@
          url('#{$fonts-root}/EncodeSansWide-Regular-webfont.woff2') format('woff2'), /* Super Modern Browsers */
          url('#{$fonts-root}/EncodeSansWide-Regular-webfont.woff') format('woff'), /* Pretty Modern Browsers */
          url('#{$fonts-root}/EncodeSansWide-Regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('#{$fonts-root}/EncodeSansWide-Regular-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+         url('#{$fonts-root}/EncodeSansWide-Regular-webfont.svg#encode_sans_wideregular') format('svg'); /* Legacy iOS */
 }
 @font-face {
     font-family: EncodeSansWide;
@@ -19,7 +19,7 @@
          url('#{$fonts-root}/EncodeSansWide-Bold-webfont.woff2') format('woff2'), /* Super Modern Browsers */
          url('#{$fonts-root}/EncodeSansWide-Bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
          url('#{$fonts-root}/EncodeSansWide-Bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('#{$fonts-root}/EncodeSansWide-Bold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+         url('#{$fonts-root}/EncodeSansWide-Bold-webfont.svg#encode_sans_widesemibold') format('svg'); /* Legacy iOS */
 }
 @font-face {
     font-family: EncodeSansWide;
@@ -29,5 +29,5 @@
          url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.woff2') format('woff2'), /* Super Modern Browsers */
          url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
          url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
-         url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+         url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.svg#encode_sans_widebold') format('svg'); /* Legacy iOS */
 }
