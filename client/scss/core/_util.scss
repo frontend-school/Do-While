@@ -12,24 +12,3 @@
     clear: both;
   }
 }
-
-@mixin i-v-box-container($height) {
-  box-sizing: border-box;
-  height: $height;
-  text-align: center;
-  white-space: nowrap;
-  &:before {
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    width: 0;
-    margin-right: -.25em; /*might want to tweak this. .25em for extra white space */
-    height: 100%;
-  }
-}
-
-.i-v-box {
-  display: inline-block;
-  vertical-align: middle;
-  white-space: normal;
-}
