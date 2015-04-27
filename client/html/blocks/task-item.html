@@ -1,6 +1,6 @@
 <li class="list-item task-item">
 
-    <div class="task-item__checkbox checkbox">
+    <div class="checkbox task-item__checkbox">
         <input class="checkbox__control" id="@@id" type="checkbox"/>
         <label class="" for="@@id"></label>
     </div>
@@ -13,7 +13,7 @@
         @@if (info_label) {
         <span class="task-item__label task-item__label_@@info_label_mod">
             @@if (project_color) {
-            <i class="badge badge_circle @@project_color"> </i>
+            <i class="badge @@project_color"> </i>
             }
             @@info_label
         </span>
@@ -36,18 +36,9 @@
     </div>
 
     <div class="task-item__buttons task-item__buttons@@buttons_mod">
-        <button class="button color_green task-item__edit">
-            <i class="icon icon_pencil">
-            </i>
-            <br/>
-            edit
+        <button class="button task-item__start">
         </button>
-
-        <button class="button color_blue task-item__start">
-            <i class="icon icon_triangle">
-            </i>
-            <br/>
-            start
+        <button class="button task-item__edit">
         </button>
     </div>
 </li>
