@@ -22,4 +22,6 @@ __BrowserSync__ proxy express server on [localhost:8001](http://localhost:8001),
 and reloads page while changes handled in _client/*_ (running before target _build:*_ task).
 __BrowserSync__ settings avaliable on [localhost:8002](http://localhost:8002).
 
++ __server:static__ - light-weight version with __BrowserSync__ **static**(!!) server [localhost:8001](http://localhost:8001).
+
 + __default__ (__build__) task compiles all sources into _./server/public_ folder.
