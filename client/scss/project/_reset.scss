@@ -1,4 +1,6 @@
 body {
+  font-family: $font-family;
+  @include font-regular(14px);
   background-color: $gray-scale-1;
   min-width: $mobile-min-width;
   overflow-x: hidden;
