@@ -8,6 +8,8 @@ $header-text-color: $gray-scale-4;
 }
 
 .header {
+  @include background-colors();
+
   display: table;
   z-index: 10;
   position: absolute;
@@ -57,5 +59,3 @@ $header-text-color: $gray-scale-4;
     }
   }
 }
-
-@include colors-state-normal-for('.header');
