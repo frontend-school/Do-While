@@ -2,8 +2,6 @@
   display: block;
   width: $menu-width;
   min-width: $menu-width;
-  overflow-x: hidden;
-  height: 100%;
   border-right: 1px solid $gray-scale-4;
 
   &__settings {
