@@ -34,10 +34,10 @@ function watchifyBundler(bundler) {
     isWatch = true;
 }
 
-gulp.task('watch:js', ['clean:js', 'hint:js'], function () {
+gulp.task('watch:js', ['clean:js', 'hint:js'], function (cb) {
     if (!isWatch)
         watchifyBundler(bundler);
-    return bundleTask();
+    cb();
 });
 
 gulp.task('build:js', ['clean:js', 'hint:js'], bundleTask);
