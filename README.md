@@ -41,3 +41,6 @@ Also restarts server while changes happens in server sources.
 + "__unused__" - This option warns when you define and never use your variables.
 
 For more info see: __http://jshint.com/docs/options/__
+
+##Route to old html markup
+Old html markup now placed on the next route: __http://localhost:3000/markup/__
