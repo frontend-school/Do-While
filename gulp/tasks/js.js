@@ -23,6 +23,6 @@ gulp.task('clean:js', function (onDone) {
 gulp.task('hint:js', function () {
     gulp.src(config.paths.src.js.all)
         .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(jshint.reporter('fail'));
+        .pipe(jshint.reporter('jshint-stylish'));
+        //.pipe(jshint.reporter('fail'));
 });

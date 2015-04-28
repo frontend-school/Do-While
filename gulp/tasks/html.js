@@ -3,9 +3,9 @@ var gulp = require('gulp'),
     fileInclude = require('gulp-file-include'),
     del = require('del'),
     config = require('../config'),
-    errorDebug = require('../lib/error-debug');;
+    errorDebug = require('../lib/error-debug');
 
-gulp.task('build:html', ['build:html:pages', 'build:html:views']);
+gulp.task('build:html', ['build:html:pages', 'build:html:markup', 'build:html:views']);
 
 
 gulp.task('build:html:pages', ['clean:html:pages'], function () {
@@ -20,6 +20,17 @@ gulp.task('clean:html:pages', function (onDone) {
     del(config.patterns.dist.html.pages, errorDebug(onDone));
 });
 
+gulp.task('build:html:markup', ['clean:html:markup'], function () {
+    return gulp.src(config.patterns.src.html.markup)
+        .pipe(fileInclude())
+        .on('error', errorDebug.errorHandler)
+        .pipe(gulp.dest(config.paths.dist.html.markup))
+        .pipe(liveReload());
+});
+
+gulp.task('clean:html:markup', function (onDone) {
+    del(config.patterns.dist.html.markup, errorDebug(onDone));
+});
 
 gulp.task('build:html:views', ['clean:html:views'], function () {
     return gulp.src(config.patterns.src.html.views)

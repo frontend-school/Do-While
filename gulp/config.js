@@ -29,7 +29,8 @@ var paths = new Layout({
         html: {
             _root: '/',
             pages: '',
-            views: 'views'
+            views: 'views',
+            markup: 'markup'
         },
         js: 'js',
         css: 'css',
@@ -53,7 +54,8 @@ var patterns = new Layout({
             _root: '/',
             pages: glob.allOfType('html'),
             pageComponents: glob.deepAllOfType('html').build('html'),
-            views: glob.deepAllOfType('html').build('js')
+            views: glob.deepAllOfType('html').build('js'),
+            markup: glob.deepAllOfType('html').build('markup')
         },
         js: glob.deepAllOfType('js').build('js'),
         scss: glob.deepAllOfType('scss').build('scss'),
@@ -72,7 +74,8 @@ var patterns = new Layout({
         html: {
             _root: '/',
             pages: glob.allOfType(),
-            views: glob.deepAllOfType().build('views')
+            views: glob.deepAllOfType().build('views'),
+            markup: glob.deepAllOfType('html').build('markup')
         },
         js: glob.deepAllOfType().build('js'),
         css: glob.deepAllOfType().build('css'),
