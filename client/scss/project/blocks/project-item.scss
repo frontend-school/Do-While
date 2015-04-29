@@ -1,0 +1,43 @@
+$marker-width: 8px;
+$count-padding-right: 16px;
+$count-badge-width: 22px;
+
+.project-item {
+  display: table;
+  position: relative;
+
+  &__marker {
+    position: absolute;
+    margin-bottom: -1px;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: $list-item-height + 1px; // overlap bottom border
+  }
+
+  &__title {
+    display: table-cell;
+    padding-left: $menu-text-left-padding;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    max-width: $menu-width - $menu-text-left-padding - $count-badge-width - $count-padding-right - 4px;
+    overflow: hidden;
+    &:first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  &__count {
+    @include font-regular(11px);
+    display: table-cell;
+    float: right;
+    padding-right: $count-padding-right;
+    .badge {
+      margin-top: -1px;
+      height: $count-badge-width;
+      width: $count-badge-width;
+      line-height: $count-badge-width;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,121 @@
+%i-task-item-col {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+%i-task-item__button {
+  @include font-bold(9px);
+  position: absolute;
+  top: 0;
+  height: $list-item-height;
+
+  box-sizing: border-box;
+  width: $task-item__button-width;
+  text-transform: uppercase;
+  border-left: 1px solid $gray-scale-0;
+
+  .icon {
+    margin-bottom: 5px;
+  }
+}
+
+.task-item {
+  position: relative;
+  display: table;
+  line-height: normal;
+
+  &__checkbox {
+    @extend %i-task-item-col;
+    text-align: center;
+    width: $header-size - 5px;
+  }
+
+  //region info section
+
+  &__info {
+    @extend %i-task-item-col;
+    text-align: left;
+    padding-top: 2px;
+  }
+
+  &__name {
+    @include font-regular(15px);
+    display: block;
+  }
+
+  //endregion
+
+  //region notification area
+
+  &__notification {
+    @extend %i-task-item-col;
+    width: 7.4ch;
+    text-align: left;
+  }
+
+  //endregion
+
+  &__label {
+    @include font-semi-bold(9px);
+
+    display: block;
+    color: $gray-scale-3;
+    text-transform: uppercase;
+
+    &_project, &_date, &_access-time {
+      margin-top: 4px;
+    }
+
+    &_project .badge {
+      margin-left: 1px;
+      margin-right: 2px;
+    }
+
+    &_date {
+      @include before-icon($icon-today-group);
+    }
+
+    &_notification {
+      @include before-icon($icon-notifications-none-group);
+    }
+
+    &_access-time {
+      @include before-icon($icon-access-time-group);
+    }
+  }
+
+  //region overlap buttons group
+
+  &__buttons {
+    @include media-mobile-tablet() {
+      display: none;
+
+      &_active {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: $hover-color;
+      }
+    }
+
+    @include media-only-desktop() {
+      display: table-cell;
+      width: $task-item__button-width *2;
+    }
+  }
+
+  &__edit {
+    @extend %i-task-item__button;
+    right: $task-item__button-width;
+  }
+
+  &__start {
+    @extend %i-task-item__button;
+    right: 0;
+  }
+
+  //endregion
+}

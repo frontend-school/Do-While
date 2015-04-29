@@ -1,0 +1,16 @@
+$mobile-min-width: 320px;
+$header-size: 44px;
+
+
+$menu-width: $mobile-min-width - $header-size - 4px;
+$menu-text-left-padding: 23px;
+$menu-icon-right-padding : 28px;
+
+$task-item__button-width: 73px;
+
+$mobile-max-width: $menu-width + $mobile-min-width - 1px;
+
+$tablet-min-width: $mobile-max-width + 1px;
+$tablet-max-width: $tablet-min-width + 2 * $task-item__button-width - 1;
+
+$desktop-min-width: $tablet-max-width + 1px;

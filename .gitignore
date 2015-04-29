@@ -39,6 +39,3 @@ out/
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
-### Project specific folders
-dist
-

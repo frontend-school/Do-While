@@ -1,0 +1,15 @@
+@mixin colorize-normal($text-color, $bg-color) {
+  color: $text-color;
+  background-color: $bg-color;
+}
+
+@mixin colorize-hover($bg-color) {
+  &:hover {
+    background-color: mix($bg-color, $hover-color);
+  }
+}
+
+@mixin colorize-all($text-color, $bg-color) {
+  @include colorize-normal($text-color, $bg-color);
+  @include colorize-hover($bg-color);
+}
