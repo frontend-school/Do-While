@@ -47,4 +47,3 @@ BuilderFactory.deepAllOfType = function (ext) {
 };
 
 module.exports = BuilderFactory;
-

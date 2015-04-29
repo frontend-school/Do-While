@@ -48,6 +48,7 @@ $header-text-color: $gray-scale-4;
 
     &_project {
       &:after {
+        margin-left: 6px;
         content: "";
         vertical-align: baseline;
         @extend .icon;
