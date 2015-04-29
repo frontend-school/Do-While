@@ -1,29 +1,32 @@
 $marker-width: 8px;
 $count-padding-right: 16px;
 $count-badge-width: 22px;
+$scroll-bar-width: 20px;
 
 .project-item {
+  @include property-colors(border-left-color);
+
   display: table;
   position: relative;
-
-  &__marker {
-    position: absolute;
-    margin-bottom: -1px;
-    top: 0;
-    left: 0;
-    width: 8px;
-    height: $list-item-height + 1px; // overlap bottom border
-  }
+  border-left: $marker-width solid transparent;
+  border-collapse: collapse;
 
   &__title {
     display: table-cell;
-    padding-left: $menu-text-left-padding;
+    padding-left: $menu-text-left-padding - $marker-width;
     vertical-align: middle;
     text-overflow: ellipsis;
-    max-width: $menu-width - $menu-text-left-padding - $count-badge-width - $count-padding-right - 4px;
+    white-space: nowrap;
+    max-width: $menu-width - $menu-text-left-padding - $count-badge-width - $count-padding-right - $scroll-bar-width;
     overflow: hidden;
     &:first-letter {
       text-transform: uppercase;
+    }
+  }
+
+  @each $bg-color-name, $bg-color in $colors {
+    &.color_#{$bg-color-name} &__count .badge {
+      @include colorize-normal($gray-scale-0, $bg-color);
     }
   }
 

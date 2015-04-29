@@ -1,6 +1,8 @@
-var path = require('path'),
+var path = require('path').posix,
     util = require('./util'),
     glob = require('./glob');
+
+const CURRENT_DIR = '.' + path.sep;
 
 var Layout = function (root, paths) {
 
@@ -78,7 +80,7 @@ Layout.prototype._resolveArrayItemProperty = function (property, value) {
 };
 
 Layout.prototype._resolveStringProperty = function (property, value) {
-    return path.join(this._root, '' + value);
+    return CURRENT_DIR + path.join(this._root, '' + value);
 };
 
 Layout.prototype._filterProperty = function (property) {

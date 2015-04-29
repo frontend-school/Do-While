@@ -3,4 +3,15 @@
   width: 100%;
   padding: 0 0 40px 0;
   margin: 0;
+
+  &__title {
+    @include colorize-normal($gray-scale-0, $gray-scale-4);
+    @include font-semi-bold(9px);
+    display: block;
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+  }
 }

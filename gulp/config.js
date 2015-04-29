@@ -14,7 +14,6 @@ var paths = new Layout({
         },
         js: {
             main: 'app.js',
-            all: ['**/*.js']
         },
         img: 'img',
         fonts: 'fonts',

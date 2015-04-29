@@ -1,0 +1,45 @@
+.week {
+  @include colorize-normal($gray-scale-5, $gray-scale-0);
+  height: $header-size;
+  width: 100%;
+  display: table;
+  border-spacing: 10px 0;
+
+  &-day {
+    display: table-cell;
+    height: 100%;
+    padding: 0 5px;
+    box-sizing: border-box;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    width: 14%;
+    text-transform: uppercase;
+    &__number, &__text {
+      display: block;
+      margin: 0;
+      color: inherit;
+    }
+
+    &__number {
+      @include font-regular(15px);
+      color: $gray-scale-5;
+    }
+
+    &__text {
+      @include font-bold(7px);
+      color: $gray-scale-3;
+      margin-top: 2px;
+    }
+  }
+  &__radiobutton {
+    display: none;
+    &:checked + .week-day {
+      border-bottom: 4px solid $color-blue;
+      border-top: 4px solid transparent;
+      > .week-day__text, > .week-day__number {
+        color: $color-blue;
+      }
+    }
+  }
+}

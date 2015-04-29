@@ -1,21 +1,32 @@
 %i-task-item-col {
   display: table-cell;
   vertical-align: middle;
+  border-bottom: 1px solid $gray-scale-2;
 }
 
 %i-task-item__button {
   @include font-bold(9px);
-  position: absolute;
-  top: 0;
-  height: $list-item-height;
-
-  box-sizing: border-box;
+  float: right;
   width: $task-item__button-width;
-  text-transform: uppercase;
+  height: 100%;
+  padding: 0;
   border-left: 1px solid $gray-scale-0;
+  text-transform: uppercase;
+}
 
-  .icon {
-    margin-bottom: 5px;
+@mixin task-item__button($bg-color, $icon-group , $text) {
+  @extend %i-task-item__button;
+  @include colorize-all($gray-scale-0, $bg-color);
+  &:before {
+    content: '';
+    display: inline-block;
+    @include retina-sprite($icon-group);
+    text-align: center;
+  }
+  &:after {
+    content: $text;
+    display: block;
+    margin-top: 5px;
   }
 }
 
@@ -23,6 +34,7 @@
   position: relative;
   display: table;
   line-height: normal;
+  border-bottom: 0;
 
   &__checkbox {
     @extend %i-task-item-col;
@@ -57,7 +69,6 @@
 
   &__label {
     @include font-semi-bold(9px);
-
     display: block;
     color: $gray-scale-3;
     text-transform: uppercase;
@@ -89,32 +100,41 @@
   &__buttons {
     @include media-mobile-tablet() {
       display: none;
-
       &_active {
         position: absolute;
         display: block;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
-        left: 0;
-        top: 0;
         background-color: $hover-color;
       }
     }
 
     @include media-only-desktop() {
-      display: table-cell;
+      @extend %i-task-item-col;
       width: $task-item__button-width *2;
+      border-bottom: 0;
+      padding-bottom: 1px;
+    }
+  }
+
+  @include media-only-desktop {
+    &:first-child &__buttons {
+      padding-top: 1px;
+    }
+
+    &:last-child &__buttons {
+      padding-bottom: 0;
     }
   }
 
   &__edit {
-    @extend %i-task-item__button;
-    right: $task-item__button-width;
+    @include task-item__button($color-green, $icon-pencil-group, 'edit');
   }
 
   &__start {
-    @extend %i-task-item__button;
-    right: 0;
+    @include task-item__button($color-blue, $icon-triangle-group, 'start');
   }
 
   //endregion
