@@ -1,0 +1,46 @@
+<div class="page__task-list">
+  <ul class="list task-list">
+  
+    <li class="list-item task-item" ng-repeat="item in filterItems = (items | filter: todayFilter)">
+  
+        <div class="task-item__checkbox checkbox">
+            <input class="checkbox__control" id="{{item.id}}" type="checkbox"/>
+            <label class="" for="{{item.id}}"></label>
+        </div>
+  
+        <div class="task-item__info">
+            <span class="task-item__name" ng-hide="item.title == false">
+                {{item.title}}
+            </span>
+            <span class="task-item__label task-item__label_{{item.id}}" ng-hide="item.info_label == false">
+                <i class="badge badge_circle {{item.project_color}}"> </i>
+                {{item.info_label}}
+            </span>
+        </div>
+  
+        <div class="task-item__notification">
+            <span class="task-item__label task-item__label_notification" ng-hide="item.notification == false">
+                {{item.notification}}
+            </span>
+            <span class="task-item__label task-item__label_access-time" ng-hide="item.access_time == false">
+                {{item.access_time}}
+            </span>
+        </div>
+  
+        <div class="task-item__buttons">
+            <button class="button color_green task-item__edit">
+                <i class="icon icon_pencil">
+                </i>
+                <br/>
+                edit
+            </button>
+            <button class="button color_blue task-item__start">
+                <i class="icon icon_triangle">
+                </i>
+                <br/>
+                start
+            </button>
+        </div>
+    </li>
+  </ul>
+</div>

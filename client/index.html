@@ -11,10 +11,99 @@
         <script src="vendor/js/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
-<div ng-view>
-</div>
-@@include('./html/pages/project/page.html')
+<body ng-controller="mainCtrl"  ng-cloak>
+
+  <div class="page">
+      <nav class="menu page__menu" ng-class="{menu_closed: isNavHide}">
+          <div class="list action-list">
+              <a href="#" class="list-item list-item_small menu__settings">
+                  Settings
+              </a>
+
+              <a href="#/today.html" class="list-item menu__today">
+                  today
+                  <div class="badge-group">
+                      <i ng-repeat="badge in todayBadges()" class="badge {{badge}}"></i>
+                  </div>
+              </a>
+
+              <a href="#/week.html" class="list-item menu__next-seven-days">
+                  next 7 days
+              </a>
+          </div>
+
+          <div class="separator"> projects</div>
+
+          <div class="list project-list">
+              <a href="#" class="list-item list-item_small menu__create-project">
+                  Create new..
+              </a>
+
+          </div>
+      </nav>
+
+
+      <div class="page__main">
+
+          <ng-header-block is-nav-hide="isNavHide" is-project-view="{{mainPageInfo.isProjectView}}">
+              {{todayLong}}
+          </ng-header-block>
+          
+          <div ng-view="Content">
+
+            <div class="page__task-list">
+            
+                <ul class="list task-list">
+            
+                  <li class="list-item task-item" ng-repeat="item in items">
+            
+                      <div class="task-item__checkbox checkbox">
+                          <input class="checkbox__control" id="{{item.id}}" type="checkbox"/>
+                          <label class="" for="{{item.id}}"></label>
+                      </div>
+            
+                      <div class="task-item__info">
+                          <span class="task-item__name" ng-hide="item.title == false">
+                              {{item.title}}
+                          </span>
+                          <span class="task-item__label task-item__label_{{item.id}}" ng-hide="item.info_label == false">
+                              <i class="badge badge_circle {{item.project_color}}"> </i>
+                              {{item.info_label}}
+                          </span>
+                      </div>
+            
+                      <div class="task-item__notification">
+                          <span class="task-item__label task-item__label_notification" ng-hide="item.notification == false">
+                              {{item.notification}}
+                          </span>
+                          <span class="task-item__label task-item__label_access-time" ng-hide="item.access_time == false">
+                              {{item.access_time}}
+                          </span>
+                      </div>
+            
+                      <div class="task-item__buttons">
+                          <button class="button color_green task-item__edit">
+                              <i class="icon icon_pencil">
+                              </i>
+                              <br/>
+                              edit
+                          </button>
+                          <button class="button color_blue task-item__start">
+                              <i class="icon icon_triangle">
+                              </i>
+                              <br/>
+                              start
+                          </button>
+                      </div>
+                  </li>
+                </ul>
+            </div>
+          </div>
+          
+          <div class="page__main-overlap" ng-click="isNavHide = !isNavHide"></div>
+      </div>
+  </div>
+
 <script src="/js/app.js"></script>
 </body>
 </html>
