@@ -1,19 +1,15 @@
-<div class="page" ng-controller="mainCtrl">
+<div class="page">
     @@include('../../blocks/menu/menu.html', {"mods" : "opened"})
 
 
     <div class="page__main">
-        <!-- @@include('../../blocks/header.html', {"color" : "blue", "title" : "work", "title_icon": true}) -->
-
-        <ng-header-block is-nav-hide="isNavHide" is-project-view="{{mainPageInfo.isProjectView}}">
-            {{mainPageInfo.title}}
-        </ng-header-block>
+        @@include('../../blocks/header.html', {"color" : "blue", "title" : "work", "title_icon": true})
 
         <div class="page__task-list">
             @@include('./task-list.html')
         </div>
 
-        <div class="page__main-overlap" ng-click="isNavHide = !isNavHide">
+        <div class="page__main-overlap">
         </div>
     </div>
 </div>

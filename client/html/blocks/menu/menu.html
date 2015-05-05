@@ -1,10 +1,10 @@
-<nav class="menu page__menu" ng-class="{menu_closed: isNavHide}">
+<nav class="menu page__menu">
     <div class="list action-list">
         <a href="#" class="list-item list-item_small menu__settings">
             Settings
         </a>
 
-        <a href="#" class="list-item menu__today">
+        <a href="markup/today.html" class="list-item menu__today">
             today
             <div class="badge-group">
                 <i class="badge color_yellow"></i>
@@ -13,7 +13,7 @@
             </div>
         </a>
 
-        <a href="#" class="list-item menu__next-seven-days">
+        <a href="/markup/week.html" class="list-item menu__next-seven-days">
             next 7 days
         </a>
     </div>
@@ -26,7 +26,7 @@
         </a>
         @@include('./project-list-item.html', { "project" : "education", "color": "green", "count" : "8","href" : "#" })
         @@include('./project-list-item.html', { "project" : "home", "color": "red", "count" : "3", "href" : "#" })
-        @@include('./project-list-item.html', { "project" : "work", "color": "blue", "count" : "2", "href" : "#" })
+        @@include('./project-list-item.html', { "project" : "work", "color": "blue", "count" : "2", "href" : "/markup/project-work.html" })
         @@include('./project-list-item.html', { "project" : "kids", "color": "yellow", "count" : "8", "href" : "#" })
         @@include('./project-list-item.html', { "project" : "study", "color": "orange", "count" : "8", "href" : "#" })
         @@include('./project-list-item.html', { "project" : "health", "color": "violet", "count" : "7", "href" : "#" })

@@ -24,7 +24,7 @@ var paths = new Layout({
             components: 'html',
             markup: {
                 _root: 'html',
-                all_pages: ['project-work.html', 'today.html', 'week.html']
+                all_pages: ['project-work.html', 'today.html', 'week.html', 'index.html']
             }
         }
     },
