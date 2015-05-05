@@ -1,1 +1,1 @@
-module.exports = [require('./example'), require('./main')];
+module.exports = [require('./main'), require('./taskList')];

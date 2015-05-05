@@ -1,11 +1,11 @@
-<header class="header page__header" ng-class="{color_blue: isProjectView}">
+<header class="header page__header">
     <a href="" ng-click="isNavHide = !isNavHide" class="header__menu-button button">
-        <i class="icon icon_hamburger" ng-class="{icon_inverted: isProjectView}"></i>
+        <i class="icon icon_hamburger"></i>
     </a>
 
-    <span class="header__title"  ng-class="{header__title_project: isProjectView}" ng-transclude></span>
+    <span class="header__title" ng-transclude>{{todayLong}}</span>
 
     <a href="#" class="header__add-task-button button">
-        <i class="icon icon_plus"  ng-class="{icon_inverted: isProjectView}"></i>
+        <i class="icon icon_plus" ></i>
     </a>
 </header>
