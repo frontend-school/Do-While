@@ -1,0 +1,33 @@
+@import "vars";
+@import "mixins";
+
+@font-face {
+    font-family: EncodeSansWide;
+    font-weight: $font-weight-regular;
+    src: url('#{$fonts-root}/EncodeSansWide-Regular-webfont.eot'); /* IE9 Compat Modes */
+    src: url('#{$fonts-root}/EncodeSansWide-Regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('#{$fonts-root}/EncodeSansWide-Regular-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+         url('#{$fonts-root}/EncodeSansWide-Regular-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+         url('#{$fonts-root}/EncodeSansWide-Regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('#{$fonts-root}/EncodeSansWide-Regular-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+@font-face {
+    font-family: EncodeSansWide;
+    font-weight: $font-weight-semi-bold;
+    src: url('#{$fonts-root}/EncodeSansWide-Bold-webfont.eot'); /* IE9 Compat Modes */
+    src: url('#{$fonts-root}/EncodeSansWide-Bold-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('#{$fonts-root}/EncodeSansWide-Bold-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+         url('#{$fonts-root}/EncodeSansWide-Bold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+         url('#{$fonts-root}/EncodeSansWide-Bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('#{$fonts-root}/EncodeSansWide-Bold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+@font-face {
+    font-family: EncodeSansWide;
+    font-weight: $font-weight-bold;
+    src: url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.eot'); /* IE9 Compat Modes */
+    src: url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+         url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+         url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('#{$fonts-root}/EncodeSansWide-SemiBold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+}

@@ -1,0 +1,62 @@
+$header-text-color: $gray-scale-4;
+
+%i-header__button {
+  vertical-align: middle;
+  padding: 0;
+  width: $header-size;
+  max-width: $header-size;
+}
+
+.header {
+  display: table;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $header-size;
+  color: $gray-scale-4;
+  background-color: $gray-scale-1;
+
+  &__menu-button {
+    @extend %i-header__button;
+    @include media-only-mobile() {
+      display: table-cell;
+    }
+    @include media-tablet-desktop() {
+      display: none;
+    }
+  }
+
+  &__add-task-button {
+    @extend %i-header__button;
+    display: table-cell;
+  }
+
+  &__title {
+    display: table-cell;
+    padding: 0;
+    @include font-semi-bold(14px);
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+
+    max-width: $mobile-min-width - 2 * $header-size;
+
+    &_project {
+      &:after {
+        margin-left: 6px;
+        content: "";
+        vertical-align: baseline;
+        @extend .icon;
+        text-overflow: clip;
+        @include retina-sprite($icon-create-group);
+      }
+    }
+  }
+}
+
+@include colors-state-normal-for('.header');

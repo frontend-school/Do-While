@@ -1,0 +1,13 @@
+.button {
+  display: block;
+  text-align: center;
+  height: 100%;
+  outline: none;
+  border: 0;
+  background-color: transparent;
+  &:hover {
+    background-color: $hover-color;
+  }
+}
+
+@include colors-state-all-for('.button');
