@@ -1,3 +1,5 @@
+var gutil = require('gulp-util');
+
 function errorDebug(callback, errorHandler) {
     if (typeof errorHandler === 'undefined')
         errorHandler = errorDebug.errorHandler;
@@ -8,6 +10,13 @@ function errorDebug(callback, errorHandler) {
     }
 }
 
-errorDebug.errorHandler = console.warn;
+errorDebug._errorHandler = gutil.log.bind(gutil);
+
+errorDebug.errorHandler = function (who) {
+    who = typeof who === 'undefined' ? '' : ('' + who).trim() + ' ';
+    return function (e) {
+        return errorDebug._errorHandler(who + e.toString());
+    };
+};
 
 module.exports = errorDebug;

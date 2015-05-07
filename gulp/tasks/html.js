@@ -11,7 +11,7 @@ gulp.task('build:html', ['build:html:pages', 'build:html:views', 'build:html:mar
 gulp.task('build:html:pages', ['clean:html:pages'], function () {
     return gulp.src(config.patterns.src.html.pages)
         .pipe(fileInclude())
-        .on('error', errorDebug.errorHandler)
+        .on('error', errorDebug.errorHandler())
         .pipe(gulp.dest(config.paths.dist.html.pages))
         .pipe(browserSync.reload({stream:true}));
 });
@@ -23,7 +23,7 @@ gulp.task('clean:html:pages', function (onDone) {
 gulp.task('build:html:markup', ['clean:html:markup'], function () {
     return gulp.src(config.paths.src.html.markup.all_pages)
         .pipe(fileInclude())
-        .on('error', errorDebug.errorHandler)
+        .on('error', errorDebug.errorHandler())
         .pipe(gulp.dest(config.paths.dist.html.markup));
 });
 
