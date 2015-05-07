@@ -13,7 +13,9 @@ var gulp = require('gulp'),
 var bundleOptions = {
     entries: './' + config.paths.src.js.__layout.main,
     basedir: './' + config.paths.src.js._root,
-    debug: !gulp.env.production
+    debug: !gulp.env.production,
+    cache: {},
+    packageCache: {}
 };
 
 var isWatch = false;
