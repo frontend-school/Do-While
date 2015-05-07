@@ -1,0 +1,11 @@
+<header ng-controller="HeaderCtrl as HeaderCtrl" class="header page__header">
+    <a href="" ng-click="HeaderCtrl.GlobalData.menuShowHide()" class="header__menu-button button">
+        <i class="icon icon_hamburger icon_inverted"></i>
+    </a>
+
+    <span class="header__title header__title_project" ng-transclude></span>
+
+    <a href="#" class="header__add-task-button button">
+        <i class="icon icon_plus icon_inverted"></i>
+    </a>
+</header>

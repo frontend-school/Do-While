@@ -46,7 +46,7 @@ $header-text-color: $gray-scale-4;
 
     max-width: $mobile-min-width - 2 * $header-size;
 
-    &_project {
+    .header_project-view &_project {
       &:after {
         margin-left: 6px;
         content: "";
@@ -57,6 +57,10 @@ $header-text-color: $gray-scale-4;
       }
     }
   }
+}
+
+.header_project-view .header {
+    @extend .color_blue;
 }
 
 @include colors-state-normal-for('.header');

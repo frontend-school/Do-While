@@ -2,7 +2,7 @@
   display: inline-block;
   vertical-align: middle;
 
-  &_inverted {
+  .header_project-view &_inverted {
     -webkit-filter: contrast(10);
   }
 }
