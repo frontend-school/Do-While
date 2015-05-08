@@ -1,0 +1,62 @@
+$header-text-color: $gray-scale-4;
+
+%i-header__button {
+  vertical-align: middle;
+  padding: 0;
+  width: $header-size;
+  cursor: pointer;
+}
+
+.header {
+  @include background-colors();
+  display: table;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $header-size;
+  color: $gray-scale-4;
+  background-color: $gray-scale-1;
+
+  &__menu-button {
+    @extend %i-header__button;
+    @include media-only-mobile() {
+      display: table-cell;
+    }
+    @include media-tablet-desktop() {
+      display: none;
+    }
+  }
+
+  &__add-task-button {
+    @extend %i-header__button;
+    display: table-cell;
+  }
+
+  &__title {
+    display: table-cell;
+    padding: 0;
+    @include font-semi-bold(14px);
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    min-width: $mobile-min-width - 2 * $header-size;
+  }
+
+  &__project {
+    text-decoration: none;
+    color: inherit;
+    &:after {
+      content: "";
+      margin-left: 3px;
+      vertical-align: baseline;
+      @extend .icon;
+      text-overflow: clip;
+      @include retina-sprite($icon-create-group);
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.menu {
+  display: block;
+  width: $menu-width;
+  min-width: $menu-width;
+  border-right: 1px solid $gray-scale-4;
+
+  &__settings {
+    padding-left: $menu-text-left-padding;
+    @include before-icon-center($icon-settings-group, $menu-text-left-padding, $list-item_small-height);
+    @include after-icon-center($icon-triangle-gray-group, $list-item-small-height, 22px);
+  }
+
+  &__today, &__next-seven-days {
+    @include font-semi-bold(14px);
+    text-transform: uppercase;
+    padding-left: $menu-text-left-padding;
+    @include after-icon-center($icon-triangle-gray-group, $list-item-height, 22px);
+  }
+
+  &__today {
+    .badge-group {
+      display: inline-block;
+      float: right;
+      padding-right: $menu-icon-right-padding + 12px;
+    }
+  }
+
+  &__create-project {
+    text-align: center;
+  }
+
+  //region modifyers
+  @include media-only-mobile {
+
+    &_closed {
+      display: none;
+      + .page__main .page__main-overlap {
+        display: none;
+      }
+    }
+  }
+  //endregion
+}

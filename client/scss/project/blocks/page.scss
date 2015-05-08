@@ -1,0 +1,40 @@
+.page {
+  display: table;
+  position: relative;
+  width: 100%;
+  min-width: $mobile-min-width;
+  height: 100vh;
+
+  &__menu {
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  &__main {
+    position: relative;
+    display: table-cell;
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    padding-top: $header-size;
+    min-width: $mobile-min-width;
+
+    &-overlap {
+      @include media-only-mobile() {
+        position: absolute;
+        z-index: 9;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $hover-color;
+      }
+      @include media-tablet-desktop() {
+        display: none;
+      }
+    }
+  }
+}

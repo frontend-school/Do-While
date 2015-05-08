@@ -1,0 +1,9 @@
+{
+  "_href": "/data/projects/0.json",
+  "id": 0,
+  "color": "blue",
+  "name": "work",
+  "tasks": {
+    "_href": "/data/projects/0/tasks.json"
+  }
+}

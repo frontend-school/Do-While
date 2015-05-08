@@ -1,0 +1,8 @@
+{
+  "view": {
+    "basePath": "/views"
+  },
+  "api": {
+    "basePath": "/data"
+  }
+}

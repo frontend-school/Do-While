@@ -1,0 +1,19 @@
+@mixin media-only-mobile() {
+  @media only screen and (max-width: $mobile-max-width) { @content; }
+}
+
+@mixin media-mobile-tablet() {
+  @media only screen and (max-width: $tablet-max-width) { @content; }
+}
+
+@mixin media-only-tablet() {
+  @media only screen and (min-width: $tablet-min-width) and (max-width: $tablet-max-width) { @content; }
+}
+
+@mixin media-tablet-desktop() {
+  @media only screen and (min-width: $tablet-min-width) { @content; }
+}
+
+@mixin media-only-desktop() {
+  @media only screen and (min-width: $desktop-min-width) { @content; }
+}

@@ -1,0 +1,44 @@
+@mixin before-icon($icon-group) {
+  position: relative;
+  $icon: nth($icon-group, 2);
+  $icon-width: nth($icon, 5);
+  padding-left: $icon-width + 3px;
+  &:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    @extend .icon;
+    @include retina-sprite($icon-group);
+  }
+}
+
+@mixin before-icon-center($icon-group, $container-width, $container-height) {
+  position: relative;
+  $icon: nth($icon-group, 2);
+  $icon-width: nth($icon, 5);
+  $icon-height: nth($icon, 6);
+  &:before {
+    content: "";
+    position: absolute;
+    left: ($container-width - $icon-width) / 2;
+    top: ($container-height - $icon-height) / 2;
+    @extend .icon;
+    @include retina-sprite($icon-group);
+  }
+}
+
+@mixin after-icon-center($icon-group, $container-height, $right-offset) {
+  position: relative;
+  $icon: nth($icon-group, 2);
+  $icon-width: nth($icon, 5);
+  $icon-height: nth($icon, 6);
+  &:after {
+    content: "";
+    position: absolute;
+    right: $right-offset;
+    top: ($container-height - $icon-height) / 2;
+    @extend .icon;
+    @include retina-sprite($icon-group);
+  }
+}

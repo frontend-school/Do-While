@@ -1,0 +1,12 @@
+<header class="header color_{{color}}">
+    <div role="button" ng-click="header.toggleMenuVisibility()" class="button header__menu-button">
+        <i class="icon icon_hamburger" ng-class="{icon_inverted: !!color}"></i>
+    </div>
+
+    <div class="header__title" ng-transclude>
+    </div>
+
+    <a ui-sref="todo" class="header__add-task-button button">
+        <i class="icon icon_plus" ng-class="{icon_inverted: !!color}"></i>
+    </a>
+</header>

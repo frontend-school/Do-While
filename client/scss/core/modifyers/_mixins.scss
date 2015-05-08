@@ -1,0 +1,23 @@
+@mixin background-colors($text-color: $gray-scale-0) {
+  @each $bg-color-name, $bg-color in $colors {
+    &.color_#{$bg-color-name} {
+      @include colorize-normal($text-color, $bg-color);
+    }
+  }
+}
+
+@mixin background-colors-with-hover($text-color: $gray-scale-0) {
+  @each $bg-color-name, $bg-color in $colors {
+    &.color_#{$bg-color-name} {
+      @include colorize-all($text-color, $bg-color);
+    }
+  }
+}
+
+@mixin property-colors($property) {
+  @each $bg-color-name, $bg-color in $colors {
+    &.color_#{$bg-color-name} {
+      #{$property}: $bg-color;
+    }
+  }
+}

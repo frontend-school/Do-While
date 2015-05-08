@@ -1,0 +1,10 @@
+<dw-header color="project.color" menu-click="page.toggleMenuVisibility()">
+    <a ui-sref="todo" class="header__project-title">
+        {{project.name}}
+    </a>
+</dw-header>
+
+<dw-task-list>
+    <dw-project-task-item ng-repeat="task in project.tasks" task="task">
+    </dw-project-task-item>
+</dw-task-list>

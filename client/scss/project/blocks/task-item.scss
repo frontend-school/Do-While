@@ -1,0 +1,144 @@
+%i-task-item-col {
+  display: table-cell;
+  vertical-align: middle;
+  border-bottom: 1px solid $gray-scale-2;
+}
+
+%i-task-item__button {
+  @include font-bold(9px);
+  float: right;
+  width: $task-item__button-width;
+  height: 100%;
+  padding: 0;
+  border-left: 1px solid $gray-scale-0;
+  text-transform: uppercase;
+}
+
+$checkbox-width: $header-size - 5px;
+$notification-width: 78px;
+
+@mixin task-item__button($bg-color, $icon-group , $text) {
+  @extend %i-task-item__button;
+  @include colorize-all($gray-scale-0, $bg-color);
+  &:before {
+    content: '';
+    display: inline-block;
+    @include retina-sprite($icon-group);
+    text-align: center;
+  }
+  &:after {
+    content: $text;
+    display: block;
+    margin-top: 5px;
+  }
+}
+
+.task-item {
+  position: relative;
+  display: table;
+  line-height: normal;
+  border-bottom: 0;
+
+  &__checkbox {
+    @extend %i-task-item-col;
+    text-align: center;
+    width: $checkbox-width;
+  }
+
+  //region info section
+
+  &__info {
+    @extend %i-task-item-col;
+    text-align: left;
+    padding-top: 2px;
+  }
+
+  &__name {
+    @include font-regular(15px);
+    display: block;
+  }
+
+  //endregion
+
+  //region notification area
+
+  &__notification {
+    @extend %i-task-item-col;
+    width: $notification-width;
+    text-align: left;
+  }
+
+  //endregion
+
+  &__label {
+    @include font-semi-bold(9px);
+    display: block;
+    color: $gray-scale-3;
+    text-transform: uppercase;
+
+    &_project, &_date, &_access-time {
+      margin-top: 4px;
+    }
+
+    &_project .badge {
+      margin-left: 1px;
+      margin-right: 2px;
+    }
+
+    &_date {
+      @include before-icon($icon-today-group);
+    }
+
+    &_notification {
+      @include before-icon($icon-notifications-none-group);
+    }
+
+    &_access-time {
+      @include before-icon($icon-access-time-group);
+    }
+  }
+
+  //region overlap buttons group
+
+  &__buttons {
+    @include media-mobile-tablet() {
+      display: none;
+      &_active {
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $hover-color;
+      }
+    }
+
+    @include media-only-desktop() {
+      @extend %i-task-item-col;
+      width: $task-item__button-width *2;
+      border-bottom: 0;
+      padding-bottom: 1px;
+    }
+  }
+
+  @include media-only-desktop {
+    &:first-child &__buttons {
+      padding-top: 1px;
+    }
+
+    &:last-child &__buttons {
+      padding-bottom: 0;
+    }
+  }
+
+  &__edit {
+    @include task-item__button($color-green, $icon-pencil-group, 'edit');
+  }
+
+  &__start {
+    @include task-item__button($color-blue, $icon-triangle-group, 'start');
+  }
+
+  //endregion
+}

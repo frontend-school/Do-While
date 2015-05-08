@@ -1,0 +1,26 @@
+<nav class="menu" ng-class="{menu_closed: !menu.isVisible}">
+    <div class="list action-list">
+        <a ui-sref="todo" class="list-item list-item_small menu__settings">
+            Settings
+        </a>
+
+        <a ui-sref="main.today" class="list-item menu__today">
+            today
+            <div class="badge-group">
+                <i class="badge color_yellow"></i>
+                <i class="badge color_red"></i>
+                <i class="badge color_green"></i>
+            </div>
+        </a>
+
+        <a ui-sref="main.week" class="list-item menu__next-seven-days">
+            next 7 days
+        </a>
+    </div>
+
+    <dw-project-list>
+        <dw-project-item project="{ id: 0, name: 'work', taskCount: 6, color: 'blue'}">
+        <!--todo remove hardcoded project data-->
+        </dw-project-item>
+    </dw-project-list>
+</nav>

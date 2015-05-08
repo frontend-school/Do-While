@@ -1,0 +1,33 @@
+<li class="list-item task-item">
+
+    <div class="checkbox task-item__checkbox">
+        <input class="checkbox__control" id="{{task.id}}" type="checkbox"/>
+        <label for="{{task.id}}"></label>
+    </div>
+
+    <div class="task-item__info">
+        <span class="task-item__name">
+            {{task.name}}
+        </span>
+
+        <span ng-transclude>
+        </span>
+    </div>
+
+    <div class="task-item__notification">
+        <span class="task-item__label task-item__label_notification" ng-show="!!task.notificationTime">
+            {{task.notificationTime}}
+        </span>
+
+        <span class="task-item__label task-item__label_access-time" ng-show="!!task.accessTime">
+            {{task.accessTime}}
+        </span>
+    </div>
+
+    <div class="task-item__buttons task-item__buttons@@buttons_mod">
+        <button class="button task-item__start">
+        </button>
+        <button class="button task-item__edit">
+        </button>
+    </div>
+</li>
