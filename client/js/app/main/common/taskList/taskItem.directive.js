@@ -7,6 +7,11 @@ module.exports = function (viewResolver) {
         required: '^dwTaskList',
         replace: true,
         transclude: true,
+        scope: {
+            task: '='
+        },
+        controller: require('./taskItem.directive.controller'),
+        controllerAs: 'taskCtrl',
         templateUrl: viewResolver.resolve('taskItem.template.html', __dirname)
     }
 };

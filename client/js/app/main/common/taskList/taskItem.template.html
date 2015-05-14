@@ -5,7 +5,7 @@
         <label for="{{task.id}}"></label>
     </div>
 
-    <div class="task-item__info">
+    <div class="task-item__info" ng-click="taskCtrl.toggleSelection()">
         <span class="task-item__name">
             {{task.name}}
         </span>
@@ -14,7 +14,7 @@
         </span>
     </div>
 
-    <div class="task-item__notification">
+    <div class="task-item__notification" ng-click="taskCtrl.toggleSelection()">
         <span class="task-item__label task-item__label_notification" ng-show="!!task.notificationTime">
             {{task.notificationTime}}
         </span>
@@ -24,10 +24,14 @@
         </span>
     </div>
 
-    <div class="task-item__buttons task-item__buttons@@buttons_mod">
-        <button class="button task-item__start">
-        </button>
-        <button class="button task-item__edit">
-        </button>
+    <div class="task-item__buttons"
+         ng-class="{'task-item__buttons_active' : !!taskCtrl.isSelected}"
+         ng-click="taskCtrl.toggleSelection()">
+
+        <a ui-sref="todo" class="button task-item__start">
+        </a>
+
+        <a ui-sref="todo" class="button task-item__edit">
+        </a>
     </div>
 </li>
