@@ -4,22 +4,23 @@
   border-bottom: 1px solid $gray-scale-2;
 }
 
-%i-task-item__button {
+$checkbox-width: $header-size - 5px;
+$notification-width: 78px;
+
+@mixin task-item__button($bg-color, $icon-group , $text) {
   @include font-bold(9px);
+  @include colorize-all($gray-scale-0, $bg-color);
+  box-sizing: border-box;
   float: right;
   width: $task-item__button-width;
   height: 100%;
   padding: 0;
   border-left: 1px solid $gray-scale-0;
   text-transform: uppercase;
-}
-
-@mixin task-item__button($bg-color, $icon-group , $text) {
-  @extend %i-task-item__button;
-  @include colorize-all($gray-scale-0, $bg-color);
   &:before {
     content: '';
     display: inline-block;
+    margin-top: 11px;
     @include retina-sprite($icon-group);
     text-align: center;
   }
@@ -27,7 +28,7 @@
   &:after {
     content: $text;
     display: block;
-    margin-top: 5px;
+    margin-top: 4px;
   }
 }
 
