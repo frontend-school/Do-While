@@ -116,7 +116,7 @@ $notification-width: 78px;
       background-color: $hover-color;
     }
 
-    @include media-desktop() {
+    @include media-desktop {
       @extend %i-task-item-col;
       display: table-cell;
       width: $task-item__button-width *2;
@@ -126,6 +126,7 @@ $notification-width: 78px;
 
       &_active {
         position: static;
+        background-color: transparent;
       }
     }
   }
