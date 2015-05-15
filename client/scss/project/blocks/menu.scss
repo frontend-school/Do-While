@@ -30,21 +30,15 @@
     text-align: center;
   }
 
-  //region modifyers
   &_closed {
     display: none;
+    
+    @include media-tablet {
+      display: block;
+    }
+
     + .page__main .page__main-overlap {
       display: none;
     }
   }
-
-  @include media-tablet() {
-    &_closed {
-      display: block;
-      + .page__main .page__main-overlap {
-        display: block;
-      }
-    }
-  }
-  //endregion
 }
