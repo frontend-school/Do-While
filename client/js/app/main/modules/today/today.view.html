@@ -1,3 +1,8 @@
 <dw-header>
-    21 mar
+    {{today.todayLong}}
 </dw-header>
+
+<dw-task-list>
+    <dw-today-task-item ng-repeat="task in today.tasks | filter: today.todayLong">
+    </dw-today-task-item>
+</dw-task-list>

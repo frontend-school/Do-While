@@ -7,9 +7,7 @@
         <a ui-sref="main.today" class="list-item menu__today">
             today
             <div class="badge-group">
-                <i class="badge color_yellow"></i>
-                <i class="badge color_red"></i>
-                <i class="badge color_green"></i>
+                <i ng-repeat="badge in menu.badges" class="badge {{badge}}"></i>
             </div>
         </a>
 
