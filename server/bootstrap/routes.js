@@ -22,6 +22,8 @@ module.exports = function (app) {
     */
     app.use('/test', routes.test);
 
+    app.use('/api', routes.api);
+
     // catch 404 and forward to error handler
     app.use(function (req, res, next) {
         var err = new Error('Not Found');

@@ -1,3 +1,8 @@
 <dw-header>
-    21 mar
+    {{today.todayDate | date: "d MMM yyyy"}}
 </dw-header>
+
+<dw-task-list>
+    <dw-today-task-item ng-repeat="task in today.tasks">
+    </dw-today-task-item>
+</dw-task-list>
