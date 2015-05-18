@@ -7,6 +7,9 @@ module.exports = function (viewResolver) {
         required: '^dwTaskList',
         replace: false,
         transclude: false,
+        scope: {
+            task: '='
+        },
         templateUrl: viewResolver.resolve('todayTaskItem.template.html', __dirname)
     };
 };
