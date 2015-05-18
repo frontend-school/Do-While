@@ -1,17 +1,17 @@
 /*
 * @ngInject
 * */
-function TaskItemViewModel() {
+function TaskItemController() {
     this.isSelected = false;
 }
 
-TaskItemViewModel._selected = null;
+TaskItemController._selected = null;
 
-TaskItemViewModel.prototype.toggleSelection = function () {
+TaskItemController.prototype.toggleSelection = function () {
     this.isSelected = !this.isSelected;
-    if(TaskItemViewModel._selected && (TaskItemViewModel._selected !== this))
-        TaskItemViewModel._selected.isSelected = false;
-    TaskItemViewModel._selected = this;
+    if(TaskItemController._selected && (TaskItemController._selected !== this))
+        TaskItemController._selected.isSelected = false;
+    TaskItemController._selected = this;
 };
 
-module.exports = TaskItemViewModel;
+module.exports = TaskItemController;
