@@ -3,8 +3,8 @@
     </dw-action-list>
 
     <dw-project-list>
-        <dw-project-item project="{ id: 0, name: 'work', taskCount: 6, color: 'blue'}">
-        <!--todo remove hardcoded project data-->
+        <dw-project-item ng-repeat="project in projectList.items" project="project">
+
         </dw-project-item>
     </dw-project-list>
 </nav>

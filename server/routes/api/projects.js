@@ -9,7 +9,9 @@ router.get('/', function(req, res) {
         if(!err){
             res.json({items: result});
         }
-        console.log('There is some problems with getting data from DB!!!'.toUpperCase());
+        else{
+            console.log('There is some problems with getting data from DB!!!'.toUpperCase());
+        }
     });
 
 });

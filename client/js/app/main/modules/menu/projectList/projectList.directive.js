@@ -6,6 +6,8 @@ module.exports = function (viewResolver) {
         restrict: 'E',
         replace: true,
         transclude: true,
+        controller: require('./projectList.directive.controller'),
+        controllerAs: 'projectList',
         templateUrl: viewResolver.resolve('projectList.template.html', __dirname)
     };
 };
