@@ -11,4 +11,21 @@ module.exports = function ($scope) {
     {name: 'study', color: 'orange'},
     {name: 'health', color: 'violet'},
   ];
+  $scope.selection = {
+    id: ''
+  };
+  $scope.$watch($scope.selection.id, function () {
+    console.log($scope.selection);
+  });
+  /*$scope.submitted = false;
+  $scope.addNewProject = function(){
+      projectService
+          .create($scope);
+
+      alert('Project "'+$scope.name+'" with "' + $scope.color + '" color was added!');
+      $scope.name = null;
+      $scope.color = null;
+      $scope.submitted = false;
+      $scope.createProject.$pristine = true;
+  };*/
 };

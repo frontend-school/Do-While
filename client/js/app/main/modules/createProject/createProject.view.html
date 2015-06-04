@@ -1,62 +1,51 @@
 <dw-task-header>add new project
 </dw-task-header>
 
-<form role="form" class="new-task" ng-controller="createProjectCtrl" name="createProject" ng-submit="createProject.$valid && addNewProject()" novalidate>
+<form role="form" class="new-task" name="createProject" ng-submit="!(color === undefined) && createProject.$valid && ctrl.checkProjects()" novalidate>
 
-    <div class="text-box" ng-class="{'has-error': !createProject.$pristine && submitted && createProject.projectName.$invalid}">
+    <div class="text-box" ng-class="{'has-error': checkName(createProject.$pristine)}">
         <label class="text-box__label" for="projectName">project name</label>
         <input class="text-box__control" id="projectName" type="text" name="projectName" ng-model="name" ng-minlength="2" required>
 
         <div class="text-box__label"
-          ng-class="{'error-message': createProject.projectName.$invalid && submitted}"
+          ng-class="{'error-message': checkName()}"
           ng-if="createProject.projectName.$error.required && submitted">
             This field is required
         </div>
         <div class="text-box__label"
-          ng-class="{'error-message': createProject.projectName.$invalid && submitted}"
+          ng-class="{'error-message': checkName()}"
           ng-if="createProject.projectName.$error.minlength && submitted">
             Too short name of project
         </div>
     </div>
 
-    <div class="text-box" ng-class="{'has-error': !createProject.$pristine && submitted && createProject.projectColor.$invalid}">
-        <label class="text-box__label" for="projectColor">project color</label>
-        <input class="text-box__control" id="projectColor" type="text" name="projectColor" ng-model="color" ng-minlength="3" required>
+    <div class="text-box">
+        <div class="text-box__label" ng-class="{'has-error': checkColor()}">project color</div>
 
         <div class="text-box__label"
-          ng-class="{'error-message': createProject.projectColor.$invalid && submitted}"
-          ng-if="createProject.projectColor.$error.required && submitted">
-            This field is required
-        </div>
-        <div class="text-box__label"
-          ng-class="{'error-message': createProject.projectColor.$invalid && submitted}"
-          ng-if="createProject.projectColor.$error.minlength && submitted">
-            Too short name of color
+          ng-class="{'error-message': checkColor()}"
+          ng-if="checkColor()">
+            Choose the color
         </div>
 
-        <div class="text-box__label">it's only for temporary purposes. use next colors:
-        'yellow',
-        'olive',
-        'orange',
-        'maroon',
-        'red',
-        'magenta',
-        'violet',
-        'purple',
-        'blue',
-        'cyan',
-        'green',
-        'green'-yellow</div>
+        <div class="colored-wrapper">
+            <span ng-repeat="item in ctrl.arrayOfColors"
+              class="colored-blocks color_{{item.color}}"
+              ng-click="ctrl.chooseColor(item.color)"
+              ng-class="{true: 'colored-blocks_hovered'}[item.color === color]" ></span>
+        </div>
+
     </div>
 
     <div class="button-container">
-      <button class="button__new-task" type="reset" ng-click="submitted = false; createProject.$pristine = true">Cancel</button>
+      <button class="button__new-task" type="reset" ng-click="reset()">Cancel</button>
       <button class="button__new-task" type="submit"
-        ng-class="{'disabled': !createProject.$pristine && createProject.$invalid}"
-        ng-disabled="!createProject.$pristine && submitted && createProject.$invalid"
+        ng-class="{'disabled': disableSubmit()}"
+        ng-disabled="disableSubmit()"
         ng-click="createProject.$pristine || (submitted = true); createProject.$pristine = false"
       >OK</button>
     </div>
 
 </form>
+
 

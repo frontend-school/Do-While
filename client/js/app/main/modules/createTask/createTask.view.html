@@ -1,7 +1,7 @@
 <dw-task-header>add new task
 </dw-task-header>
 
-<form role="form" ng-controller="createTaskCtrl" class="new-task" name="createTask" novalidate>
+<form role="form" ng-controller="createTaskCtrl" class="new-task" name="createTask" ng-submit="createTask.$valid && addNewProject()" novalidate>
 
 <div class="text-box" ng-class="{'has-error': !createTask.$pristine && submitted && createTask.taskName.$invalid}">
         <label class="text-box__label" for="taskName">task name</label>
@@ -21,7 +21,7 @@
 
     <div class="text-box">
         <label class="text-box__label" for="selectProject">project</label>
-        <select class="text-box__control" id="selectProject" name="selectProject">
+        <select class="text-box__control" id="selectProject" name="selectProject" ng-model="selection.id">
           <option ng-repeat="project in projects">{{project.name}}</option>
         </select>
     </div>
