@@ -2,7 +2,7 @@ var oop = require('./oop');
 
 describe('oop', function () {
     it('should contains inherits function', function () {
-        expect(oop.inherits).toEqual(jasmine.any(Function));
+        expect(oop.inherits).to.be.a('function');
     });
 
     describe('inherits', function () {
@@ -27,15 +27,15 @@ describe('oop', function () {
 
         it('should instanceof by base class', function () {
             console.log(extended);
-            expect(extended instanceof Base).toBe(true);
+            expect(extended instanceof Base).to.be.true;
         });
 
         it('should has inherited property', function () {
-            expect(extended.a).toBeDefined();
+            expect(extended.a).to.be.defined;
         });
 
         it('should has inherited property as own', function () {
-            expect(extended.hasOwnProperty('a')).toBeTruthy();
+            expect(extended.hasOwnProperty('a')).to.be.true;
         });
     });
 });

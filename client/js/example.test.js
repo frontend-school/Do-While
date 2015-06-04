@@ -2,20 +2,20 @@ var example = require('./example');
 
 describe("example", function () {
     it("should exports object", function () {
-        expect(example).toEqual(jasmine.any(Object));
+        expect(example).to.be.a('object');
     });
 
     it("should has function sayHello", function () {
-        expect(example.sayHello).toEqual(jasmine.any(Function));
+        expect(example.sayHello).to.be.a('function');
     });
 
     describe(":sayHello", function () {
         it("should return hello when no args", function () {
-			expect(example.sayHello()).toBe("hello");
+			expect(example.sayHello()).to.equal("hello");
         });
 
         it("should return 'hello world' when 'world' passed", function () {
-			expect(example.sayHello("world")).toBe("hello world");
+			expect(example.sayHello("world")).to.equal("hello world");
         });
     });
 });
