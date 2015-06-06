@@ -5,7 +5,7 @@ var isTddMode = true;
 module.exports = function (config) {
     config.set({
         port: 9876,
-        frameworks: ['browserify', 'jasmine'],
+        frameworks: ['browserify', 'mocha', 'sinon-chai'],
 
         basePath: '',
         preprocessors: (function (pattern) {
@@ -16,7 +16,7 @@ module.exports = function (config) {
 
         files: [].concat(layout.patterns.src.js.tests),
 
-        reporters: ['progress'],
+        reporters: ['mocha'],
         colors: true,
         logLevel: config.LOG_INFO,
 
