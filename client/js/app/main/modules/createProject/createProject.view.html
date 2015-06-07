@@ -1,7 +1,7 @@
 <dw-task-header>add new project
 </dw-task-header>
 
-<form role="form" class="new-task" name="createProject" ng-submit="!(color === undefined) && createProject.$valid && ctrl.checkProjects()" novalidate>
+<form role="form" class="new-task" name="createProject" novalidate>
 
     <div class="text-box" ng-class="{'has-error': checkName(createProject.$pristine)}">
         <label class="text-box__label" for="projectName">project name</label>
@@ -20,11 +20,11 @@
     </div>
 
     <div class="text-box">
-        <div class="text-box__label" ng-class="{'has-error': checkColor()}">project color</div>
+        <div class="text-box__label" ng-class="{'has-error': verifyColor()}">project color</div>
 
         <div class="text-box__label"
-          ng-class="{'error-message': checkColor()}"
-          ng-if="checkColor()">
+          ng-class="{'error-message': verifyColor()}"
+          ng-if="verifyColor()">
             Choose the color
         </div>
 
@@ -32,7 +32,7 @@
             <span ng-repeat="item in ctrl.arrayOfColors"
               class="colored-blocks color_{{item.color}}"
               ng-click="ctrl.chooseColor(item.color)"
-              ng-class="{true: 'colored-blocks_hovered'}[item.color === color]" ></span>
+              ng-class="{true: 'colored-blocks_hovered'}[ctrl.checkColor(item.color)]" ></span>
         </div>
 
     </div>
@@ -42,7 +42,7 @@
       <button class="button__new-task" type="submit"
         ng-class="{'disabled': disableSubmit()}"
         ng-disabled="disableSubmit()"
-        ng-click="createProject.$pristine || (submitted = true); createProject.$pristine = false"
+        ng-click="submit()"
       >OK</button>
     </div>
 

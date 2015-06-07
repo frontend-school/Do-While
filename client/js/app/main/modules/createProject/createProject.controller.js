@@ -57,7 +57,7 @@ module.exports = function ($scope, projectService) {
           color: $scope.color.toLowerCase()
         });
 
-        $scope.fullReset();
+        $scope.reset();
       }
     });
   };
@@ -66,16 +66,11 @@ module.exports = function ($scope, projectService) {
     $scope.color = item;
   };
 
-  $scope.fullReset = function () {
-    $scope.name = null;
+  vm.checkColor = function (item) {
+    return (item === $scope.color) ? true : false;
   };
 
-  $scope.reset = function () {
-    $scope.submitted = false;
-    $scope.createProject.$pristine = true;
-  };
-
-  $scope.checkColor = function () {
+  $scope.verifyColor = function () {
     return (($scope.color === undefined) && $scope.submitted) ? true : false;
   };
 
@@ -84,8 +79,23 @@ module.exports = function ($scope, projectService) {
     return (!a && $scope.submitted && $scope.createProject.projectName.$invalid) ? true : false;
   };
 
+  $scope.reset = function () {
+    $scope.submitted = false;
+    $scope.name = '';
+    $scope.createProject.$pristine = true;
+    $scope.createProject.projectName.$invalid = true;
+    delete $scope.color;
+  };
+
   $scope.disableSubmit = function () {
-    return (($scope.color === undefined) && !$scope.createProject.$pristine && $scope.submitted && $scope.createProject.$invalid) ? true : false;
+    return ($scope.verifyColor() && !$scope.createProject.$pristine && $scope.createProject.$invalid) ? true : false;
+  };
+
+  $scope.submit = function () {
+    $scope.submitted = true;
+    $scope.createProject.$pristine = false;
+
+    !($scope.color === undefined) && $scope.createProject.$valid && vm.checkProjects();
   };
 
 };
