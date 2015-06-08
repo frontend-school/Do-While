@@ -1,5 +1,5 @@
 /*@ngInject*/
-module.exports = function ($rootScope) {
+module.exports = function (loaderEventManager) {
     var pendingCount = 0;
 
     return {
@@ -8,18 +8,22 @@ module.exports = function ($rootScope) {
     };
 
     function startOne() {
-        if (!isPending())
-            $rootScope.$emit('loader:start');
+        if (!isPending()) {
+            loaderEventManager.start();
+        }
         addPending();
     }
 
-
     function finishOne() {
         if (isPending()) {
-            removePending();
-            if (!isPending()) {
-                $rootScope.$emit('loader:finish');
-            }
+            onRaiseFinishEvent();
+        }
+    }
+
+    function onRaiseFinishEvent() {
+        removePending();
+        if (!isPending()) {
+            loaderEventManager.finish();
         }
     }
 
