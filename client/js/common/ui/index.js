@@ -1,6 +1,6 @@
-var angular = require('angular');
-
-var uiModule = angular.module('uiModule', [])
-    .directive('dwColor', require('./color.directive'));
-
-module.exports = uiModule.name;
+module.exports = require('angular')
+    .module('uiModule', [
+        require('./loader')
+    ])
+    .directive('dwColor', require('./color.directive'))
+    .name;
