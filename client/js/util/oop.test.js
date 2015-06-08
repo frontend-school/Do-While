@@ -26,7 +26,6 @@ describe('oop', function () {
 
 
         it('should instanceof by base class', function () {
-            console.log(extended);
             expect(extended instanceof Base).to.be.true;
         });
 

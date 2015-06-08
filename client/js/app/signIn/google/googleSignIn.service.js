@@ -11,7 +11,6 @@ module.exports = function ($http, $q, credentials, googleAppId) {
     function authorize(onAuthorized) {
         _onAuthorized = onAuthorized;
         onOAuth2(function (authClient) {
-            console.log('start grant offline access');
             authClient.grantOfflineAccess({
                 redirect_uri: 'postmessage'
             }).then(signIn);
@@ -35,12 +34,12 @@ module.exports = function ($http, $q, credentials, googleAppId) {
     function signIn(authResult) {
         return verifyCode(authResult.code)
             .success(function (result) {
-                console.log(result);
                 credentials.set(result);
                 _onAuthorized();
             })
             .error(function (reason) {
                 console.log(reason);
+                //todo
             });
     }
 

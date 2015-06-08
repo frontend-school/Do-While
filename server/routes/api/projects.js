@@ -3,17 +3,16 @@ var express = require('express'),
     Project = require('../../models/project.model');
 
 // This route for getting project data to the client
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
 
     Project.find({}, function(err, result) {
         if (err) {
             res.send(err);
             return;
         }
-
-        res.json({
-            items: result
-        });
+        setTimeout(function () {
+            res.json({items: result});
+        }, 1000);
     });
 
 });
