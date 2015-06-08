@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     browserSync = require('browser-sync'),
-    jshint = require('gulp-jshint'),
     browserify = require('browserify'),
     watchify = require('watchify'),
     sourceStream = require('vinyl-source-stream2'),
@@ -36,20 +35,14 @@ function watchifyBundler(bundler) {
     gutil.log('Watchify start watching...');
 }
 
-gulp.task('watch:js', ['clean:js', 'build:html:templatecache.js', 'hint:js'], function (cb) {
+gulp.task('watch:js', ['clean:js', 'build:html:templatecache.js'], function (cb) {
     if (!isWatch)
         watchifyBundler(bundler);
     cb();
 });
 
-gulp.task('build:js', ['clean:js', 'build:html:templatecache.js', 'hint:js'], bundleTask);
+gulp.task('build:js', ['clean:js', 'build:html:templatecache.js'], bundleTask);
 
 gulp.task('clean:js', function (onDone) {
     del(config.patterns.dist.js, errorDebug(onDone));
-});
-
-gulp.task('hint:js', function () {
-    return gulp.src(config.patterns.src.js.all)
-        .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'));
 });
