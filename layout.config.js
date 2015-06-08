@@ -3,7 +3,7 @@ var glob = require('./lib/glob'),
 
 var paths = new Layout({
     data: {
-        _root : '.data'
+        _root: '.data'
     },
     bin: {
         server: 'www'
@@ -102,7 +102,7 @@ var patterns = new Layout({
         vendor: glob.deepAllOfType().build('vendor')
     },
     server: {
-        js : [glob.deepAllOfType('js'), glob('/public/**/*', 'js').exclude()]
+        js: [glob.deepAllOfType('js'), glob('/public/**/*', 'js').exclude()]
     }
 });
 
