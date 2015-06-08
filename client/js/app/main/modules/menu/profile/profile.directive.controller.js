@@ -4,7 +4,6 @@ module.exports = function ($state, profileService, credentials) {
 
     profileService.getProfile()
         .success(function (profile) {
-            console.log(profile);
             vm.name = profile.name;
             vm.photo = profile.photo + '?sz=76';
         });

@@ -48,7 +48,6 @@ module.exports = function ($rootScope, $timeout, loaderConfig) {
         if (finishTimeout === 0) {
             onFinish();
         } else {
-            console.log('not gone timeout', finishTimeout, loaderConfig.freeze);
             $timeout(onFinish, finishTimeout);
         }
         startTime = null;
