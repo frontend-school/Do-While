@@ -15,4 +15,5 @@ module.exports = function ($scope) {
         vm.isVisible = isVisible;
         event.stopPropagation();
     });
+
 };

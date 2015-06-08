@@ -6,45 +6,83 @@ var express = require('express'),
 router.get('/', function(req, res) {
 
     Project.find({}, function(err, result) {
-        if(err){
+        if (err) {
             res.send(err);
             return;
         }
-        res.json({items: result});
+
+        res.json({
+            items: result
+        });
     });
 
 });
 
 // This route for getting project data from client and saving them to DB
-router.post('/', function(req, res){
+router.post('/', function(req, res) {
 
-    var validationError = {
-        type: 'Validation Error',
-        message: ''
+    var statusOfAction = {
+        status: '',
+        message: '',
+        data: {}
     };
 
-    if(!req.body.name){
-        validationError.message = 'Username is required'
+    if (!req.body.name) {
+        statusOfAction.status = 'error';
+        statusOfAction.message = 'project name is required';
+        res.status(500).send(statusOfAction);
+        return;
     }
-    if(!req.body.color){
-        validationError.message = 'Color is required'
-    }
-    if(validationError.message){
-        res.json(validationError);
+    if (!req.body.color) {
+        statusOfAction.status = 'error';
+        statusOfAction.message = 'project color is required';
+        res.status(500).send(statusOfAction);
         return;
     }
 
-    var newProject = Project({
-        name: req.body.name,
-        color: req.body.color,
-        taskCount: 0    // This is for demo (random task count)
-    });
+    // Get Projects from db
+    Project.find({
+        name: req.body.name
+    }, function(err, result) {
+        if (err) {
+            statusOfAction.status = 'error';
+            statusOfAction.message = 'can\'t find data in db';
+            res.status(500).send(statusOfAction);
+            return;
+        }
+        if (result && result[0] !== undefined) {
+            statusOfAction.status = 'error';
+            statusOfAction.message = 'name already exist';
+            res.status(500).send(statusOfAction);
+            return;
+        } else {
 
-    newProject.save(function(err){
-        if(err){
-            res.send(err);
+            newProject = Project({
+                name: req.body.name,
+                color: req.body.color,
+                taskCount: 0 // This is for demo (random task count)
+            });
+
+            newProject.save(function(err) {
+                if (err) {
+                    statusOfAction.status = 'error';
+                    statusOfAction.message = 'can\'t save in db';
+                    res.status(500).send(statusOfAction);
+                    return;
+                }
+            });
+
+            statusOfAction.status = 'success';
+            statusOfAction.message = 'project was added';
+            statusOfAction.data = {
+                name: req.body.name,
+                color: req.body.color,
+                taskCount: 0,
+            };
+            res.status(200).send(statusOfAction);
         }
     });
+
 });
 
 module.exports = router;

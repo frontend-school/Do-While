@@ -4,10 +4,10 @@
 module.exports = function ($scope, projectService) {
 
   $scope.submitted = false;
+  $scope.errorRequest = '';
+  $scope.successRequest = '';
 
-  var vm = this;
-
-  vm.arrayOfColors = [
+  $scope.Colors = [
     {color: "yellow"},
     {color: "olive"},
     {color: "orange"},
@@ -22,61 +22,33 @@ module.exports = function ($scope, projectService) {
     {color: "green-yellow"}
   ];
 
-  vm.checkProjects = function () {
-    // if ($scope.color === undefined) return;
+  $scope.checkProjects = function () {
 
-    projectService.getAllProjects().then(function (res) {
-
-      vm.isExistProject = {
-        name: false,
-        color: false
-      };
-
-      var projects = res.data.items;
-
-      for (var i = 0; i < projects.length; i++) {
-        if (projects[i].name == $scope.name) {
-          vm.isExistProject.name = true;
-        }
-        if (projects[i].color == $scope.color) {
-          vm.isExistProject.color = true;
-        }
-      }
-
-      if (vm.isExistProject.name && vm.isExistProject.color) {
-        alert("Project with the same name and color is existing!");
-      } else if (vm.isExistProject.name) {
-        alert("Project with the same name is existing!");
-      } else if (vm.isExistProject.color) {
-        alert("Project with the same color is existing!");
-      } else {
-        alert('Project "'+$scope.name+'" with "' + $scope.color + '" color was added!');
-
-        projectService.create({
-          name: $scope.name.toLowerCase(),
-          color: $scope.color.toLowerCase()
-        });
-
-        $scope.reset();
-      }
+    projectService.create({
+      name: $scope.name,
+      color: $scope.color
+    }).then(function(res) {
+      $scope.successRequest = res.data.status;
+      projectService.addNewProject(res.data.data);
+    }).catch(function(res) {
+      $scope.errorRequest = res.data.message;
     });
   };
 
-  vm.chooseColor = function (item) {
+  $scope.chooseColor = function (item) {
     $scope.color = item;
   };
 
-  vm.checkColor = function (item) {
-    return (item === $scope.color) ? true : false;
+  $scope.isColorSelected = function (item) {
+    return item === $scope.color;
   };
 
   $scope.verifyColor = function () {
-    return (($scope.color === undefined) && $scope.submitted) ? true : false;
+    return ($scope.color === undefined) && $scope.submitted;
   };
 
-  $scope.checkName = function (a) {
-    (a == undefined) ? 0 : a;
-    return (!a && $scope.submitted && $scope.createProject.projectName.$invalid) ? true : false;
+  $scope.verifyName = function () {
+    return $scope.submitted && $scope.createProject.projectName.$invalid;
   };
 
   $scope.reset = function () {
@@ -87,15 +59,17 @@ module.exports = function ($scope, projectService) {
     delete $scope.color;
   };
 
-  $scope.disableSubmit = function () {
-    return ($scope.verifyColor() && !$scope.createProject.$pristine && $scope.createProject.$invalid) ? true : false;
+  $scope.isSubmitDisabled = function () {
+    return ($scope.verifyColor() && !$scope.createProject.$pristine && $scope.createProject.$invalid);
   };
 
   $scope.submit = function () {
     $scope.submitted = true;
     $scope.createProject.$pristine = false;
 
-    !($scope.color === undefined) && $scope.createProject.$valid && vm.checkProjects();
+    !($scope.color === undefined) && $scope.createProject.$valid && $scope.checkProjects();
+    $scope.errorRequest = '';
+    if ($scope.successRequest === 'success') $scope.reset();
   };
 
 };
