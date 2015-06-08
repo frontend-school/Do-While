@@ -6,13 +6,13 @@
 </dw-week-calendar>
 
 <div class="page-main__content-inner page-main__content-inner_week">
-	<dw-task-list ng-repeat="dayTasks in week.weekTasks">
-	    
-	    <li id="{{dayTasks.date | date:'dm'}}" class="list__title"> 
-	    	{{dayTasks.date | weekDayFilter}} 
-	    </li>
+    <dw-task-list ng-repeat="dayTasks in week.weekTasks">
 
-	    <dw-today-task-item ng-repeat="task in dayTasks.tasks" task="task">
-	    </dw-today-task-item>
-	</dw-task-list>
+        <li id="{{dayTasks.date | date:'dm'}}" class="list__title">
+            {{dayTasks.date | date:'d EEE'}}
+        </li>
+
+        <dw-today-task-item ng-repeat="task in dayTasks.tasks" task="task">
+        </dw-today-task-item>
+    </dw-task-list>
 </div>

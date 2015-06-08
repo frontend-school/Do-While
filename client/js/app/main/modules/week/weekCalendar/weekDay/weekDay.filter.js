@@ -7,6 +7,6 @@ module.exports = function ($filter, calendarService) {
   return function (date) {
     if (calendarService.isDateEquals(new Date(), date))
       return 'today';
-    return dateFilter(date, 'd EEE');
+    return dateFilter(date, 'EEE');
   };
 };
