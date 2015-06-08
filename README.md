@@ -23,6 +23,10 @@ using [nodemon](http://nodemon.io/) and watch for server changes. (for take effe
 
 + __default__ (__build__) task compiles all sources into _./server/public_ folder.
 
++ quality:js - check all js code via JsHint (server and client side).
++ quality:js:client - check client js code via JsHint.
++ quality:js:server - check server js code via JsHint.
+
 # Test
 
 We using [karma](http://karma-runner.github.io/0.12/index.html) as test runner. 

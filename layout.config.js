@@ -100,6 +100,9 @@ var patterns = new Layout({
         },
         fonts: glob.deepAllOfType().build('fonts'),
         vendor: glob.deepAllOfType().build('vendor')
+    },
+    server: {
+        js : [glob.deepAllOfType('js'), glob('/public/**/*', 'js').exclude()]
     }
 });
 
