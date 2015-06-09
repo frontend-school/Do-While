@@ -1,6 +1,6 @@
 var express = require('express'),
     router = express.Router(),
-    Tasks = require('../../models/task.model');
+    Tasks = require('../../models/tasks');
 
 router.post('/', function(req, res) {
 
@@ -14,7 +14,10 @@ router.post('/', function(req, res) {
     newTask = Tasks({
         projectId: req.body.projectId,
         name: req.body.name,
-        date: req.body.date
+        date: req.body.date,
+        notificationTime: '',
+        accessTime: '',
+        isReady: false
     });
 
     newTask.save(function(err) {

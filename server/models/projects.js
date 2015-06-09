@@ -2,11 +2,12 @@
 var db = require('./../bootstrap/db.connection.js');
 
 // Schema for project-list
-var projectListSchema = db.mongoose.Schema({
+var projectsSchema = db.mongoose.Schema({
     name: String,
     color: String,
-    taskCount: Number
+    tasks: Array
+    // tasks: [{type: db.mongoose.Schema.ObjectId, ref: 'tasks'}]
 });
 
 // Export model to needed controller in Do-While/server/routes
-module.exports = db.connection.model('ProjectListSchema', projectListSchema);
+module.exports = db.connection.model('projects', projectsSchema);

@@ -1,7 +1,7 @@
 var express = require('express'),
     router = express.Router(),
-    Project = require('../../models/project.model'),
-    Tasks = require('../../models/task.model');
+    Project = require('../../models/projects'),
+    Tasks = require('../../models/tasks');
 
 // This route for getting project data to the client
 router.get('/', function (req, res) {
@@ -22,27 +22,28 @@ router.get('/', function (req, res) {
 router.get('/:projectId', function (req, res) {
 
     var project = req.params.projectId;
-    Project.find({_id: project}, function(err, result) {
+
+    Project.find({_id: project}, function(err, findedProject) {
         if (err) {
             res.status(500).send(err);
             return;
         }
-        if (result.length > 1) {
+        if (findedProject.length > 1) {
             res.status(500).send('find more then one result with the same id');
             return;
         }
 
-        Tasks.find({projectId: project}, function (err, result2) {
+        Tasks.find({projectId: project}, function (err, findedTasks) {
             if (err) {
                 res.status(500).send(err);
                 return;
             }
-            if (result2.length === 0) {
-                res.json({data: result[0], statusOfTasks: 'no any tasks'});
+            if (findedTasks.length === 0) {
+                res.json({data: findedProject[0], statusOfTasks: 'no any tasks'});
                 return;
             }
             setTimeout(function () {
-                res.json({data: result[0], dataTasks: result2});
+                res.json({data: findedProject[0], dataTasks: findedTasks});
             }, 1000);
         });
         // there was setTimeout;
