@@ -8,12 +8,12 @@ module.exports = function (loaderService) {
     };
 
     function passWithStart(pass) {
-        loaderService.startOne();
+        loaderService.start();
         return pass;
     }
 
     function passWithFinish(pass) {
-        loaderService.finishOne();
+        loaderService.finish();
         return pass;
     }
 };
