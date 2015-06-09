@@ -1,14 +1,6 @@
 /*@ngInject*/
-module.exports = function ($scope) {
+module.exports = function (loaderService) {
     var vm = this;
 
-    vm.isLoading = false;
-
-    $scope.$onRootScope('loader:start', function () {
-        vm.isLoading = true;
-    });
-
-    $scope.$onRootScope('loader:finish', function () {
-        vm.isLoading = false;
-    });
+    vm.isLoading = loaderService.isLoading;
 };
