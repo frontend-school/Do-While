@@ -6,6 +6,7 @@ var express = require('express'),
 resourceApiRouter.use(passport.authenticate('bearer', {session: false}));
 resourceApiRouter.use('/projects', require('./projects'));
 resourceApiRouter.use('/users', require('./users'));
+resourceApiRouter.use('/tasks', require('./tasks'));
 
 apiRouter.use('/auth', require('./auth'));
 apiRouter.use(resourceApiRouter);

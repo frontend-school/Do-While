@@ -1,7 +1,7 @@
 /**
  * @ng-Inject
  */
-module.exports = function ($scope) {
+module.exports = function ($scope, projectService) {
 
   $scope.submitted = false;
   $scope.projects = [
@@ -17,15 +17,32 @@ module.exports = function ($scope) {
   $scope.$watch($scope.selection.id, function () {
     console.log($scope.selection);
   });
-  /*$scope.submitted = false;
-  $scope.addNewProject = function(){
-      projectService
-          .create($scope);
 
-      alert('Project "'+$scope.name+'" with "' + $scope.color + '" color was added!');
-      $scope.name = null;
-      $scope.color = null;
-      $scope.submitted = false;
-      $scope.createProject.$pristine = true;
-  };*/
+  $scope.setTaskDate = '';
+  $scope.requestStatus = '';
+
+  $scope.setTodayDate = function () {
+    $scope.setTaskDate = new Date();
+    console.log($scope.setTaskDate);
+  };
+
+  $scope.setTomorrowDate = function () {
+    var d = new Date();
+    $scope.setTaskDate = new Date(d.valueOf() + 24*60*60*1000);
+    console.log($scope.setTaskDate);
+  };
+
+  $scope.setDate = function () {
+    console.log('I don\'t do anything yet');
+  };
+
+  $scope.sendTask = function () {
+    projectService.createTask({
+      projectId: $scope.project,
+      name: $scope.name,
+      date: $scope.setTaskDate.toJSON()
+    }).then(function(res) {
+      console.log(res);
+    });
+  };
 };

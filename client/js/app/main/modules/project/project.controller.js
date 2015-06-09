@@ -3,18 +3,14 @@
  */
 module.exports = function ($stateParams, projectService) {
     var vm = this;
-    this.tasks = [];
+    vm.tasks = [];
 
     var id = $stateParams.projectId;
 
     projectService.getById(id)
         .success(function (project) {
-            vm.color = project.color;
-            vm.name = project.name;
-
-        projectService.getTasks(id)
-            .success(function (response) {
-                vm.tasks = response.items;
-            });
+            vm.color = project.data.color;
+            vm.name = project.data.name;
+            vm.tasks = project.dataTasks;
         });
 };

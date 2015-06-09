@@ -19,17 +19,33 @@
         </div>
     </div>
 
-    <div class="text-box">
+    <div class="text-box" ng-class="{'has-error': !createTask.$pristine && submitted && createTask.projectName.$invalid}">
+            <label class="text-box__label" for="projectName">project name</label>
+            <input class="text-box__control" id="projectName" type="text" name="projectName" ng-model="project" ng-minlength="2" required>
+
+            <div class="text-box__label"
+              ng-class="{'error-message': createTask.projectName.$invalid && submitted}"
+              ng-if="createTask.projectName.$error.required && submitted">
+                This field is required
+            </div>
+            <div class="text-box__label"
+              ng-class="{'error-message': createTask.projectName.$invalid && submitted}"
+              ng-if="createTask.projectName.$error.minlength && submitted">
+                Too short name of task
+            </div>
+        </div>
+
+    <!-- <div class="text-box">
         <label class="text-box__label" for="selectProject">project</label>
         <select class="text-box__control" id="selectProject" name="selectProject" ng-model="selection.id">
           <option ng-repeat="project in projects">{{project.name}}</option>
         </select>
-    </div>
+    </div> -->
 
     <div class="button-container">
-        <button class="button__new-task">Today</button>
-        <button class="button__new-task">Tomorrow</button>
-        <button class="button__new-task">Pick date</button>
+        <button class="button__new-task" ng-click="setTodayDate()">Today</button>
+        <button class="button__new-task" ng-click="setTomorrowDate()">Tomorrow</button>
+        <button class="button__new-task" ng-click="setDate()">Pick date</button>
     </div>
 
     <div class="text-box text-box_half">
@@ -40,11 +56,10 @@
     <div class="button-container">
         <button class="button__new-task" type="reset" ng-click="submitted = false; createTask.$pristine = true">Cancel</button>
         <button class="button__new-task">Add Next</button>
-        <button class="button__new-task" type="submit"
-          ng-class="{'disabled': !createTask.$pristine && createTask.$invalid}"
-          ng-disabled="!createTask.$pristine && submitted && createTask.$invalid"
-          ng-click="createTask.$pristine || (submitted = true); createTask.$pristine = false"
-      >OK</button>
+        <button class="button__new-task" type="submit" ng-click="sendTask()">OK</button>
+      <!-- ng-class="{'disabled': !createTask.$pristine && createTask.$invalid}"
+      ng-disabled="!createTask.$pristine && submitted && createTask.$invalid"
+      ng-click="createTask.$pristine || (submitted = true); createTask.$pristine = false" -->
     </div>
 
 </form>
