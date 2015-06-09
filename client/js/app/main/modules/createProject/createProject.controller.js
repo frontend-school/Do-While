@@ -4,8 +4,8 @@
 module.exports = function ($scope, projectService) {
 
   $scope.submitted = false;
-  $scope.errorRequest = '';
-  $scope.successRequest = '';
+  $scope.requestMessage = '';
+  $scope.requestStatus = '';
 
   $scope.Colors = [
     {color: "yellow"},
@@ -28,10 +28,14 @@ module.exports = function ($scope, projectService) {
       name: $scope.name,
       color: $scope.color
     }).then(function(res) {
-      $scope.successRequest = res.data.status;
-      projectService.addNewProject(res.data.data);
-    }).catch(function(res) {
-      $scope.errorRequest = res.data.message;
+      $scope.requestStatus = res.data.status;
+      if ($scope.requestStatus === 'success') {
+        projectService.addNewProject(res.data.data);
+        $scope.reset();
+        $scope.requestMessage = '';
+      } else {
+        $scope.requestMessage = res.data.message;
+      }
     });
   };
 
@@ -54,6 +58,7 @@ module.exports = function ($scope, projectService) {
   $scope.reset = function () {
     $scope.submitted = false;
     $scope.name = '';
+    $scope.requestMessage = '';
     $scope.createProject.$pristine = true;
     $scope.createProject.projectName.$invalid = true;
     delete $scope.color;
@@ -68,8 +73,6 @@ module.exports = function ($scope, projectService) {
     $scope.createProject.$pristine = false;
 
     !($scope.color === undefined) && $scope.createProject.$valid && $scope.checkProjects();
-    $scope.errorRequest = '';
-    if ($scope.successRequest === 'success') $scope.reset();
   };
 
 };

@@ -7,8 +7,8 @@
         <label class="text-box__label" for="projectName">project name</label>
         <input class="text-box__control" id="projectName" type="text" name="projectName" ng-model="name" ng-minlength="2" required>
 
-        <div class="text-box__label error-message" ng-if="errorRequest">
-          {{errorRequest}}
+        <div class="text-box__label error-message" ng-if="requestMessage">
+          {{requestMessage}}
         </div>
 
         <div class="text-box__label"

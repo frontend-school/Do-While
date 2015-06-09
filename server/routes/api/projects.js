@@ -51,7 +51,7 @@ router.post('/', function(req, res) {
         }
         if (result && result[0] !== undefined) {
             statusOfAction.status = 'error';
-            statusOfAction.message = 'name already exist';
+            statusOfAction.message = 'project with the same name is already exist';
             res.status(500).send(statusOfAction);
             return;
         } else {
@@ -72,7 +72,7 @@ router.post('/', function(req, res) {
             });
 
             statusOfAction.status = 'success';
-            statusOfAction.message = 'project was added';
+            statusOfAction.message = 'project was added in DB';
             statusOfAction.data = {
                 name: req.body.name,
                 color: req.body.color,
