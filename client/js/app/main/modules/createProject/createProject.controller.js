@@ -24,19 +24,36 @@ module.exports = function ($scope, projectService) {
 
   $scope.checkProjects = function () {
 
-    projectService.createProject({
-      name: $scope.name,
-      color: $scope.color
-    }).then(function(res) {
-      $scope.requestStatus = res.data.status;
-      if ($scope.requestStatus === 'success') {
-        projectService.newProjectAdded(res.data.data);
-        $scope.reset();
-        $scope.requestMessage = '';
-      } else {
-        $scope.requestMessage = res.data.message;
-      }
-    });
+    if (projectService.editedProject.id) {
+      projectService.editProject({
+        id: projectService.editedProject.id,
+        name: $scope.name,
+        color: $scope.color
+      }).then(function(res) {
+        $scope.requestStatus = res.data.status;
+        if ($scope.requestStatus === 'success') {
+          projectService.projectEdited(res.data.data);
+          $scope.reset();
+          $scope.requestMessage = '';
+        } else {
+          $scope.requestMessage = res.data.message;
+        }
+      });
+    } else {
+      projectService.createProject({
+        name: $scope.name,
+        color: $scope.color
+      }).then(function(res) {
+        $scope.requestStatus = res.data.status;
+        if ($scope.requestStatus === 'success') {
+          projectService.newProjectAdded(res.data.data);
+          $scope.reset();
+          $scope.requestMessage = '';
+        } else {
+          $scope.requestMessage = res.data.message;
+        }
+      });
+    }
   };
 
   $scope.chooseColor = function (item) {

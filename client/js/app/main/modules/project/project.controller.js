@@ -13,4 +13,9 @@ module.exports = function ($stateParams, projectService) {
             vm.name = project.data.name;
             vm.tasks = project.data.tasks;
         });
+
+    vm.setProjectId = function () {
+      projectService.editedProject.id = id;
+      projectService.editedProject.name = vm.name;
+    };
 };

@@ -5,8 +5,17 @@ var project = require('./project.events');
  */
 module.exports = function ($http, apiConfig, $rootScope) {
 
+    this.editedProject = {
+        id: '',
+        name: ''
+    };
+
     this.newProjectAdded = function (item) {
         $rootScope.$emit(project.create, item);
+    };
+
+    this.projectEdited = function (item) {
+        $rootScope.$emit(project.edit, item);
     };
 
     this.getById = function (id) {
@@ -19,6 +28,10 @@ module.exports = function ($http, apiConfig, $rootScope) {
 
     this.createProject = function (project) {
         return $http.post('/api/projects', { name: project.name, color: project.color });
+    };
+
+    this.editProject = function (project) {
+        return $http.post('/api/projects/edit', {id: project.id, name: project.name, color: project.color });
     };
 
     this.createTask = function (project) {

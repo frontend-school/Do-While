@@ -1,3 +1,4 @@
 module.exports = {
-    create: 'create:project'
+    create: 'create:project',
+    edit: 'edit:project'
 };

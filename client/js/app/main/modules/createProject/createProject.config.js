@@ -7,5 +7,10 @@ module.exports = function ($stateProvider) {
         templateUrl: 'createProject.view.html',
         controller: 'createProjectCtrl',
         controllerAs: 'ctrl'
+    }).state('main.editProject', {
+      url: '/projects/edit',
+      templateUrl: 'createProject.view.html',
+      controller: 'createProjectCtrl',
+      controllerAs: 'ctrl'
     });
 };

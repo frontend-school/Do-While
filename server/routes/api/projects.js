@@ -127,4 +127,74 @@ router.post('/', function(req, res) {
 
 });
 
+router.post('/edit', function(req, res) {
+
+    var statusOfAction = {
+            status: '',
+            message: '',
+            data: {}
+        };
+
+    if (!req.body.name) {
+        statusOfAction.status = 'error';
+        statusOfAction.message = 'project name is required';
+        res.status(500).send(statusOfAction);
+        return;
+    }
+    if (!req.body.color) {
+        statusOfAction.status = 'error';
+        statusOfAction.message = 'project color is required';
+        res.status(500).send(statusOfAction);
+        return;
+    }
+
+    // Get Projects from db
+    Project.find({
+        name: req.body.name
+    }, function(err, result1) {
+        if (err) {
+            statusOfAction.status = 'error';
+            statusOfAction.message = 'can\'t find data in db';
+            res.status(500).send(statusOfAction);
+            return;
+        }
+        if (result1.length > 1) {
+            statusOfAction.status = 'error';
+            statusOfAction.message = 'find more than one projects';
+            res.status(500).send(statusOfAction);
+            return;
+        }
+        if (result1 && result1[0] !== undefined) {
+            statusOfAction.status = 'error';
+            statusOfAction.message = 'project with the same name is already exist';
+            res.status(500).send(statusOfAction);
+            return;
+        } else {
+
+            Project.update({
+                _id: req.body.id
+            }, {
+                $set: {name: req.body.name, color: req.body.color}
+            }, function (err) {
+                if (err) {
+                    statusOfAction.status = 'error';
+                    statusOfAction.message = 'can\'t find project with current id';
+                    res.status(500).send(statusOfAction);
+                    return;
+                }
+                statusOfAction.status = 'success';
+                statusOfAction.message = 'project was updated';
+                statusOfAction.data = {
+                    _id: req.body.id,
+                    name: req.body.name,
+                    color: req.body.color
+                };
+                res.status(200).send(statusOfAction);
+            });
+
+        }
+    });
+
+});
+
 module.exports = router;
