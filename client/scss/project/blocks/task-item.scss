@@ -72,7 +72,7 @@ $notification-width: 78px;
     &_hovered {
       display: none;
 
-      @include media-desktop() {
+      @include media-tablet {
         display: table-cell;
       }
     }
@@ -122,7 +122,7 @@ $notification-width: 78px;
       background-color: $hover-color;
     }
 
-    @include media-desktop() {
+    @include media-tablet {
       display: table-cell;
       vertical-align: middle;
       width: $task-item__button-width *2;

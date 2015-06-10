@@ -1,7 +1,7 @@
 %page-element {
   position: absolute;
 
-  @include media-tablet {
+  @include media-desktop {
     position: relative;
     display: table-cell;
   }
@@ -13,12 +13,12 @@
   margin: 0 auto;
   width: 100%;
   min-width: $mobile-min-width;
-  max-width: $desktop-page-max-width;
   height: 100vh;
   overflow-x: hidden;
 
-  @include media-tablet {
+  @include media-desktop {
     display: table;
+    max-width: $desktop-page-max-width;
   }
 
   &__menu {
@@ -28,14 +28,14 @@
     bottom: 0;
     overflow-y: auto;
 
-    @include media-tablet {
-      psoition: relative;
+    @include media-desktop {
+      position: relative;
     }
 
     &_closed {
       display: none;
 
-      @include media-tablet {
+      @include media-desktop {
         display: block;
       }
       + .page-main__content {
@@ -60,7 +60,7 @@
     overflow-y: hidden;
     z-index: 8;
 
-    @include media-tablet {
+    @include media-desktop {
       right: 0;
       margin-left: $menu-width + 1px;
       position: absolute;
@@ -87,7 +87,7 @@
       background-color: $hover-color;
       z-index: 10;
 
-      @include media-tablet() {
+      @include media-desktop {
         display: none;
       }
     }
