@@ -3,6 +3,6 @@
     "basePath": "/views"
   },
   "api": {
-    "basePath": "/data"
+    "basePath": "/api"
   }
 }
