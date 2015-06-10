@@ -1,130 +1,80 @@
 var express = require('express'),
     router = express.Router(),
-    Project = require('../../models/projects'),
-    Tasks = require('../../models/tasks');
+    Project = require('../../models/project');
+    Tasks = require('../../models/task');
 
-// This route for getting project data to the client
 router.get('/', function (req, res) {
 
-    Project.find({}, function(err, findedProject) {
+    Project.find().populate('tasks').exec(function (err, projects) {
         if (err) {
             res.status(500).send(err);
             return;
         }
 
-        findedProject.forEach(function (item) {
-            Tasks.count({projectId: item._id}, function (err, result) {
-                if (err) {
-                    res.status(500).send(err);
-                    return;
-                }
-                item.tasksCount = result;
-            });
-        });
-
         setTimeout(function () {
-            res.json(findedProject);
+            res.json(projects);
         }, 1000);
     });
 
 });
 
-router.get('/:projectId', function (req, res) {
+router.get('/:projectId', function (req, res, next) {
 
-    var project = req.params.projectId;
+    var projectId = req.params.projectId;
 
-    Project.find({_id: project}, function(err, findedProject) {
-        if (err) {
-            res.status(500).send(err);
-            return;
-        }
-        if (findedProject.length > 1) {
-            res.status(500).send('find more then one result with the same id');
-            return;
-        }
-
-        Tasks.find({projectId: project}, function (err, findedTasks) {
+    Project
+        .findOne({_id: projectId})
+        .populate('tasks')
+        .exec(function (err, project) {
             if (err) {
-                res.status(500).send(err);
-                return;
+                return next(err);
             }
-            setTimeout(function () {
-                findedProject[0].tasks = findedTasks;
-                res.json({data: findedProject[0]});
-            }, 1000);
+            if (!project) {
+                return res.status(404).json('not found');
+            }
+            res.json(project);
         });
-    });
-
 });
 
-// This route for getting project data from client and saving them to DB
-router.post('/', function(req, res) {
+router.post('/', function (req, res, next) {
 
-    var newProject,
-        statusOfAction = {
-            status: '',
-            message: '',
-            data: {}
-        };
+    var project = req.body;
 
-    if (!req.body.name) {
-        statusOfAction.status = 'error';
-        statusOfAction.message = 'project name is required';
-        res.status(500).send(statusOfAction);
-        return;
-    }
-    if (!req.body.color) {
-        statusOfAction.status = 'error';
-        statusOfAction.message = 'project color is required';
-        res.status(500).send(statusOfAction);
-        return;
+    if (!project.name) {
+        return res.status(500).json({
+            message: 'name is required'
+        });
     }
 
-    // Get Projects from db
-    Project.find({
-        name: req.body.name
-    }, function(err, result) {
+    if (!project.color) {
+        return res.status(500).send({
+            message: 'color is required'
+        });
+    }
+
+    Project.count({
+        name: project.name
+    }, function (err, hasProjectWithName) {
+
         if (err) {
-            statusOfAction.status = 'error';
-            statusOfAction.message = 'can\'t find data in db';
-            res.status(500).send(statusOfAction);
-            return;
+            return next(err);
         }
-        if (result && result[0] !== undefined) {
-            statusOfAction.status = 'error';
-            statusOfAction.message = 'project with the same name is already exist';
-            res.status(500).send(statusOfAction);
-            return;
-        } else {
 
-            newProject = Project({
-                name: req.body.name,
-                color: req.body.color,
-                tasks: []
+        if (hasProjectWithName) {
+            return res.status(500).send({
+                message: 'project with the same name is already exist'
             });
-
-            newProject.save(function(err, result) {
-                if (err) {
-                    statusOfAction.status = 'error';
-                    statusOfAction.message = 'can\'t save in db';
-                    res.status(500).send(statusOfAction);
-                    return;
-                }
-                statusOfAction.status = 'success';
-                statusOfAction.message = 'project was added in DB';
-                statusOfAction.data = {
-                    _id: result._id,
-                    name: result.name,
-                    color: result.color,
-                    tasksCount: 0,
-                    tasks: []
-                };
-                res.status(200).send(statusOfAction);
-            });
-
         }
+
+        project = Project(project);
+
+        project.save(function (err, project) {
+            if (err) {
+                return next(err);
+            }
+            res.json(project);
+        });
     });
-
 });
 
 router.post('/edit', function(req, res) {
