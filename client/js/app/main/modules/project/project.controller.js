@@ -11,6 +11,6 @@ module.exports = function ($stateParams, projectService) {
         .success(function (project) {
             vm.color = project.data.color;
             vm.name = project.data.name;
-            vm.tasks = project.dataTasks;
+            vm.tasks = project.data.tasks;
         });
 };

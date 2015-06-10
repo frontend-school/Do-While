@@ -6,14 +6,24 @@ var express = require('express'),
 // This route for getting project data to the client
 router.get('/', function (req, res) {
 
-    Project.find({}, function(err, result) {
+    Project.find({}, function(err, findedProject) {
         if (err) {
             res.status(500).send(err);
             return;
         }
+
+        findedProject.forEach(function (item) {
+            Tasks.find({projectId: item._id}, function (err, findedTasks) {
+                if (err) {
+                    res.status(500).send(err);
+                    return;
+                }
+                item.tasksCount = findedTasks.length;
+            });
+        });
+
         setTimeout(function () {
-            console.log(result);
-            res.json({items: result});
+            res.json(findedProject);
         }, 1000);
     });
 
@@ -38,15 +48,11 @@ router.get('/:projectId', function (req, res) {
                 res.status(500).send(err);
                 return;
             }
-            if (findedTasks.length === 0) {
-                res.json({data: findedProject[0], statusOfTasks: 'no any tasks'});
-                return;
-            }
             setTimeout(function () {
-                res.json({data: findedProject[0], dataTasks: findedTasks});
+                findedProject[0].tasks = findedTasks;
+                res.json({data: findedProject[0]});
             }, 1000);
         });
-        // there was setTimeout;
     });
 
 });
@@ -94,26 +100,28 @@ router.post('/', function(req, res) {
             newProject = Project({
                 name: req.body.name,
                 color: req.body.color,
-                taskCount: 0 // This is for demo (random task count)
+                tasks: []
             });
 
-            newProject.save(function(err) {
+            newProject.save(function(err, result) {
                 if (err) {
                     statusOfAction.status = 'error';
                     statusOfAction.message = 'can\'t save in db';
                     res.status(500).send(statusOfAction);
                     return;
                 }
+                statusOfAction.status = 'success';
+                statusOfAction.message = 'project was added in DB';
+                statusOfAction.data = {
+                    _id: result._id,
+                    name: result.name,
+                    color: result.color,
+                    tasksCount: 0,
+                    tasks: []
+                };
+                res.status(200).send(statusOfAction);
             });
 
-            statusOfAction.status = 'success';
-            statusOfAction.message = 'project was added in DB';
-            statusOfAction.data = {
-                name: req.body.name,
-                color: req.body.color,
-                taskCount: 0,
-            };
-            res.status(200).send(statusOfAction);
         }
     });
 

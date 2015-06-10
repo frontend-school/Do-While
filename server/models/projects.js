@@ -5,6 +5,7 @@ var db = require('./../bootstrap/db.connection.js');
 var projectsSchema = db.mongoose.Schema({
     name: String,
     color: String,
+    tasksCount: Number,
     tasks: Array
     // tasks: [{type: db.mongoose.Schema.ObjectId, ref: 'tasks'}]
 });

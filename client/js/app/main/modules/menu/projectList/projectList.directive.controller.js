@@ -9,7 +9,7 @@ module.exports = function (projectService, $rootScope) {
     projectService
       .getAllProjects()
       .then(function (res) {
-          vm.items = res.data.items;
+          vm.items = res.data;
       });
 
     $rootScope.$on(addNewProject.createdNewProjects, function (event, project) {
