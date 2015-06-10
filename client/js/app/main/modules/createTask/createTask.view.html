@@ -1,7 +1,7 @@
 <dw-task-header>add new task
 </dw-task-header>
 
-<form role="form" ng-controller="createTaskCtrl" class="new-task" name="createTask" ng-submit="createTask.$valid && addNewProject()" novalidate>
+<form role="form" ng-controller="createTaskCtrl" class="new-task" name="createTask" ng-submit="createTask.$valid && newProjectAdded()" novalidate>
 
 <div class="text-box" ng-class="{'has-error': !createTask.$pristine && submitted && createTask.taskName.$invalid}">
         <label class="text-box__label" for="taskName">task name</label>

@@ -1,4 +1,4 @@
-var addNewProject = require('../../project/createNewProjects.events');
+var project = require('../../project/project.events');
 
 /*
  * @ngInject
@@ -12,7 +12,7 @@ module.exports = function (projectService, $rootScope) {
           vm.items = res.data;
       });
 
-    $rootScope.$on(addNewProject.createdNewProjects, function (event, project) {
+    $rootScope.$on(project.create, function (event, project) {
       vm.items.push(project);
     });
 };

@@ -1,12 +1,12 @@
-var addNewProject = require('./createNewProjects.events');
+var project = require('./project.events');
 
 /**
  * @ngInject
  */
 module.exports = function ($http, apiConfig, $rootScope) {
 
-    this.addNewProject = function (item) {
-        $rootScope.$emit(addNewProject.createdNewProjects, item);
+    this.newProjectAdded = function (item) {
+        $rootScope.$emit(project.create, item);
     };
 
     this.getById = function (id) {
@@ -17,7 +17,7 @@ module.exports = function ($http, apiConfig, $rootScope) {
         return $http.get(apiConfig.basePath + '/projects/' + id + '/tasks.json');
     };
 
-    this.create = function (project) {
+    this.createProject = function (project) {
         return $http.post('/api/projects', { name: project.name, color: project.color });
     };
 

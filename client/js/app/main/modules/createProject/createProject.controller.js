@@ -24,13 +24,13 @@ module.exports = function ($scope, projectService) {
 
   $scope.checkProjects = function () {
 
-    projectService.create({
+    projectService.createProject({
       name: $scope.name,
       color: $scope.color
     }).then(function(res) {
       $scope.requestStatus = res.data.status;
       if ($scope.requestStatus === 'success') {
-        projectService.addNewProject(res.data.data);
+        projectService.newProjectAdded(res.data.data);
         $scope.reset();
         $scope.requestMessage = '';
       } else {
