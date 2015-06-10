@@ -1,0 +1,55 @@
+<dw-task-header>edit project
+</dw-task-header>
+
+<form role="form" class="new-task" name="createProject" novalidate>
+
+    <div class="text-box" ng-class="{'has-error': !createProject.$pristine && verifyName()}">
+        <label class="text-box__label" for="projectName">project name</label>
+        <input class="text-box__control" id="projectName" type="text" name="projectName" ng-model="name" ng-minlength="2" required>
+
+        <div class="text-box__label error-message" ng-if="requestMessage">
+          {{requestMessage}}
+        </div>
+
+        <div class="text-box__label"
+          ng-class="{'error-message': verifyName()}"
+          ng-if="createProject.projectName.$error.required && submitted">
+            This field is required
+        </div>
+        <div class="text-box__label"
+          ng-class="{'error-message': verifyName()}"
+          ng-if="createProject.projectName.$error.minlength && submitted">
+            Too short name of project
+        </div>
+    </div>
+
+    <div class="text-box">
+        <div class="text-box__label" ng-class="{'has-error': verifyColor()}">project color</div>
+
+        <div class="text-box__label"
+          ng-class="{'error-message': verifyColor()}"
+          ng-if="verifyColor()">
+            Choose the color
+        </div>
+
+        <div class="colored-wrapper">
+            <span ng-repeat="item in Colors"
+              class="colored-blocks color_{{item.color}}"
+              ng-click="chooseColor(item.color)"
+              ng-class="{true: 'colored-blocks_hovered'}[isColorSelected(item.color)]" ></span>
+        </div>
+
+    </div>
+
+    <div class="button-container">
+      <button class="button__new-task" type="reset" ng-click="reset()">Cancel</button>
+      <button class="button__new-task" type="submit"
+        ng-class="{'disabled': isSubmitDisabled()}"
+        ng-disabled="isSubmitDisabled()"
+        ng-click="submit()"
+      >OK</button>
+    </div>
+
+</form>
+
+
