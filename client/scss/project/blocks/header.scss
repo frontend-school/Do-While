@@ -21,7 +21,7 @@ $header-text-color: $gray-scale-4;
     &_left {
       left: 0;
 
-      @include media-tablet {
+      @include media-desktop {
         display: none;
       }
     }

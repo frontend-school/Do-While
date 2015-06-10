@@ -15,7 +15,7 @@ $menu-width: $mobile-min-width - $header-size - 4px;
 $menu-text-left-padding: 23px;
 $menu-icon-right-padding : 28px;
 
-$tablet-min-width: $menu-width + $mobile-min-width;
+$tablet-min-width: 768px;
+$desktop-min-width: 1024px;
 
-$desktop-min-width: $tablet-min-width + 2 * $task-item__button-width;
-$desktop-page-max-width: 950px;
+$desktop-page-max-width: $desktop-min-width;
