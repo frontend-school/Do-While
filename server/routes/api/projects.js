@@ -13,12 +13,12 @@ router.get('/', function (req, res) {
         }
 
         findedProject.forEach(function (item) {
-            Tasks.find({projectId: item._id}, function (err, findedTasks) {
+            Tasks.count({projectId: item._id}, function (err, result) {
                 if (err) {
                     res.status(500).send(err);
                     return;
                 }
-                item.tasksCount = findedTasks.length;
+                item.tasksCount = result;
             });
         });
 
