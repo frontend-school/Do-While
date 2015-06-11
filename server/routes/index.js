@@ -11,7 +11,13 @@ module.exports = function (app) {
         res.json({
             method: req.method,
             body: req.body,
-            query: req.query
+            query: req.query,
+            isExpand: {
+                'a': req.query.isExpand('a'),
+                'a.b': req.query.isExpand('a.b'),
+                'a.b.c': req.query.isExpand('a.b.c'),
+                'a.b.c.d': req.query.isExpand('a.b.c.d')
+            }
         })
     });
 

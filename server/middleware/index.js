@@ -10,7 +10,8 @@ module.exports = function (app) {
         .use(bodyParser.json())
         .use(bodyParser.urlencoded({extended: false}))
         .use(methodOverride())
-        .use(require('./queryJsonParser'));
+        .use(require('./queryJsonParser'))
+        .use(require('./queryIsExpand'));
 
     require('./passport')(app);
 };
