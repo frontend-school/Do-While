@@ -1,13 +1,13 @@
 /**
  * @ngInject
  */
-module.exports = function (todayService) {
-    var vm = this;
+module.exports = function(todayService) {
+  var vm = this;
 
-    this.todayDate = new Date();
-    this.tasks = [];
+  vm.todayDate = new Date();
+  vm.tasks = [];
 
-    todayService.getTodayTasks().success(function (tasks) {
-        vm.tasks = tasks;
-    });
+  todayService.getTodayTasks().then(function(res) {
+    vm.tasks = res.data.data;
+  });
 };

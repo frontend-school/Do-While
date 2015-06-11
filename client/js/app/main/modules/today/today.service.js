@@ -3,21 +3,27 @@
  */
 module.exports = function ($http, apiConfig, calendarService) {
 
-    this.getAllTasks = function (config) {
-        return $http.get(apiConfig.basePath + '/tasks.json', config);
+    this.getTodayTasks = function () {
+        return $http.get('/api/tasks');
     };
 
-    this.getTodayTasks = function () {
+    /*this.getAllTasks = function (config) {
+        return $http.get(apiConfig.basePath + '/tasks.json', config);
+    };*/
+
+    /*this.getTodayTasks = function () {
         var date = new Date(); // "2015-05-17" as example can be used
         return this.getAllTasks({
             transformResponse: appendTransform($http.defaults.transformResponse, function (tasks) {
-                tasks = mapDate(tasks);
-                return filterByDate(tasks, date);
+                tasks =  mapDate(tasks);
+                return tasks;
+                // tasks = mapDate(tasks);
+                // return filterByDate(tasks, date);
             })
         });
-    };
+    };*/
 
-    this.getWeekTasks = function () {
+    /*this.getWeekTasks = function () {
         var todayDate = new Date();
 
         return this.getAllTasks({
@@ -26,7 +32,7 @@ module.exports = function ($http, apiConfig, calendarService) {
                 return groupTasksByDay(tasks);
             })
         });
-    };
+    };*/
 
     function appendTransform(defaults, transform) {
         defaults = angular.isArray(defaults) ? defaults : [defaults];

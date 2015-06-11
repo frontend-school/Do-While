@@ -17,5 +17,6 @@ module.exports = function ($stateParams, projectService) {
     vm.setProjectId = function () {
       projectService.editedProject.id = id;
       projectService.editedProject.name = vm.name;
+      projectService.editedProject.color = vm.color;
     };
 };

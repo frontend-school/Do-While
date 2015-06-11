@@ -7,7 +7,8 @@ module.exports = function ($http, apiConfig, $rootScope) {
 
     this.editedProject = {
         id: '',
-        name: ''
+        name: '',
+        color: ''
     };
 
     this.newProjectAdded = function (item) {

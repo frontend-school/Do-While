@@ -5,7 +5,7 @@ module.exports = function (todayService) {
     var vm = this;
     this.colors = [];
 
-    todayService.getTodayTasks()
+    /*todayService.getTodayTasks()
         .success(function (tasks) {
             vm.colors = tasks.reduce(function (colors, task) {
                 function hasColor(color) {
@@ -20,5 +20,5 @@ module.exports = function (todayService) {
 
                 return colors;
             }, vm.colors);
-        });
+        });*/
 };

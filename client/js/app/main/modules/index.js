@@ -6,8 +6,8 @@ module.exports = [
     // main view-modules :
     require('./createTask'),
 
+    require('./project'),
     require('./today'),
     require('./week'),
-    require('./project'),
     require('./createProject')
 ];
