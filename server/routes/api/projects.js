@@ -165,10 +165,34 @@ router.post('/edit', function(req, res) {
             return;
         }
         if (result1 && result1[0] !== undefined) {
-            statusOfAction.status = 'error';
-            statusOfAction.message = 'project with the same name is already exist';
-            res.status(500).send(statusOfAction);
-            return;
+            if (result1[0]._id != req.body.id) {
+                statusOfAction.status = 'error';
+                statusOfAction.message = 'project with the same name is already exist';
+                res.status(500).send(statusOfAction);
+                return;
+            } else {
+                Project.update({
+                    _id: req.body.id
+                }, {
+                    $set: {color: req.body.color}
+                }, function (err) {
+                    if (err) {
+                        statusOfAction.status = 'error';
+                        statusOfAction.message = 'can\'t update this project';
+                        res.status(500).send(statusOfAction);
+                        return;
+                    }
+                    statusOfAction.status = 'success';
+                    statusOfAction.message = 'project color was updated';
+                    statusOfAction.data = {
+                        _id: req.body.id,
+                        name: req.body.name,
+                        color: req.body.color
+                    };
+                    res.status(200).send(statusOfAction);
+                });
+            }
+
         } else {
 
             Project.update({
