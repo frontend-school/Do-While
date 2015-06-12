@@ -6,6 +6,8 @@ module.exports = function ($scope, projectService) {
   $scope.submitted = false;
   $scope.requestMessage = '';
   $scope.requestStatus = '';
+  $scope.name = projectService.editedProject.name;
+  $scope.color = projectService.editedProject.color;
 
   $scope.Colors = [
     {color: "yellow"},

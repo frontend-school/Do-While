@@ -16,7 +16,7 @@ module.exports = function (projectService, $rootScope) {
     vm.resetProjectId = function () {
       projectService.editedProject.id = '';
       projectService.editedProject.name = '';
-      projectService.editedProject.color = ''; // ????
+      projectService.editedProject.color = '';
     };
 
     $rootScope.$on(project.create, function (event, project) {
