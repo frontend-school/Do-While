@@ -3,6 +3,10 @@
   width: 100%;
   padding-top: 20px;
 
+  &:first-child {
+    padding-top: 0;
+  }
+
   &_half {
     width: 40%;
   }

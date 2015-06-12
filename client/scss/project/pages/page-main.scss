@@ -76,6 +76,12 @@
       &_week{
         height: calc(100% - #{$header-size * 2});
       }
+
+      &_validation-form {
+        padding: 20px 16px;
+        background: $gray-scale-0;
+        min-height: 100%;
+      }
     }
 
     &-overlay {
