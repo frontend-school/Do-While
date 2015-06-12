@@ -3,6 +3,8 @@
  */
 module.exports = function ($http, apiConfig, calendarService) {
 
+    this.todayBadges = [];
+
     this.getTodayTasks = function () {
         return $http.get('/api/tasks');
     };
