@@ -11,6 +11,7 @@ module.exports = function (projectService, $rootScope) {
       .getAllProjects()
       .then(function (res) {
           vm.items = res.data;
+          projectService.projects = vm.items;
       });
 
     vm.resetProjectId = function () {
@@ -21,6 +22,7 @@ module.exports = function (projectService, $rootScope) {
 
     $rootScope.$on(project.create, function (event, project) {
       vm.items.push(project);
+      projectService.projects = vm.items;
     });
 
     $rootScope.$on(project.edit, function (event, project) {
@@ -30,5 +32,6 @@ module.exports = function (projectService, $rootScope) {
           item.color = project.color;
         }
       });
+      projectService.projects = vm.items;
     });
 };

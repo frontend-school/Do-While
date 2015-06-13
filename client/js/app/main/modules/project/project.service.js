@@ -11,6 +11,8 @@ module.exports = function ($http, apiConfig, $rootScope) {
         color: ''
     };
 
+    this.projects = [];
+
     this.newProjectAdded = function (item) {
         $rootScope.$emit(project.create, item);
     };
