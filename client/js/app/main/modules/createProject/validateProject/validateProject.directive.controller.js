@@ -32,31 +32,28 @@ module.exports = function ($scope, projectService) {
         name: $scope.name,
         color: $scope.color
       }).then(function(res) {
-        $scope.requestStatus = res.data.status;
-        if ($scope.requestStatus === 'success') {
-          projectService.projectEdited(res.data.data);
-          $scope.reset();
-          $scope.requestMessage = '';
-        } else {
-          $scope.requestMessage = res.data.message;
-        }
+        requestHandler(res, projectService.projectEdited);
       });
     } else {
       projectService.createProject({
         name: $scope.name,
         color: $scope.color
       }).then(function(res) {
-        $scope.requestStatus = res.data.status;
-        if ($scope.requestStatus === 'success') {
-          projectService.newProjectAdded(res.data.data);
-          $scope.reset();
-          $scope.requestMessage = '';
-        } else {
-          $scope.requestMessage = res.data.message;
-        }
+        requestHandler(res, projectService.newProjectAdded);
       });
     }
   };
+
+  function requestHandler(arg, func) {
+    $scope.requestStatus = arg.data.status;
+    if ($scope.requestStatus === 'success') {
+      func(arg.data.data);
+      $scope.reset();
+      $scope.requestMessage = '';
+    } else {
+      $scope.requestMessage = arg.data.message;
+    }
+  }
 
   $scope.chooseColor = function (item) {
     $scope.color = item;
@@ -70,7 +67,7 @@ module.exports = function ($scope, projectService) {
     return ($scope.color === undefined) && $scope.submitted;
   };
 
-  $scope.verifyName = function () {
+  $scope.verifyProjectName = function () {
     return $scope.submitted && $scope.createProject.projectName.$invalid;
   };
 

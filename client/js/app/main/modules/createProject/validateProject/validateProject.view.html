@@ -1,7 +1,7 @@
 <form role="form" class="page-main__content-inner" name="createProject" novalidate>
 
     <div class="page-main__content-inner_validation-form">
-      <div class="text-box" ng-class="{'has-error': !createProject.$pristine && verifyName()}">
+      <div class="text-box" ng-class="{'has-error': !createProject.$pristine && verifyProjectName()}">
           <label class="text-box__label" for="projectName">project name</label>
           <input class="text-box__control" id="projectName" type="text" name="projectName" ng-model="name" ng-minlength="2" required>
 
@@ -10,12 +10,12 @@
           </div>
 
           <div class="text-box__label"
-            ng-class="{'error-message': verifyName()}"
+            ng-class="{'error-message': verifyProjectName()}"
             ng-if="createProject.projectName.$error.required && submitted">
               This field is required
           </div>
           <div class="text-box__label"
-            ng-class="{'error-message': verifyName()}"
+            ng-class="{'error-message': verifyProjectName()}"
             ng-if="createProject.projectName.$error.minlength && submitted">
               Too short name of project
           </div>
