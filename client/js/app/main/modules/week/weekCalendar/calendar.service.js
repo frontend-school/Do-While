@@ -43,6 +43,8 @@ module.exports = function () {
 	}
 
 	function isDateEquals(a, b) {
+		a = new Date(a);
+		b = new Date(b);
 		return a.getFullYear() === b.getFullYear() &&
 			a.getMonth() === b.getMonth() &&
 			a.getDay() === b.getDay();

@@ -40,7 +40,7 @@ module.exports = function ($scope, projectService) {
     projectService.createTask({
       projectId: $scope.project,
       name: $scope.name,
-      date: $scope.setTaskDate.toJSON()
+      date: $scope.setTaskDate
     }).then(function(res) {
       console.log(res);
     });

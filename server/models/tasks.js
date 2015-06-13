@@ -6,7 +6,7 @@ var tasksSchema = db.mongoose.Schema({
     // project: {type: db.mongoose.Schema.ObjectId, ref: 'projects'},
     projectId: String,
     name: String,
-    date: String,
+    date: Date,
     notificationTime: String,
     accessTime: String,
     isReady: Boolean
