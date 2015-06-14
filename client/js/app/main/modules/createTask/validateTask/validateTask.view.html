@@ -1,38 +1,35 @@
 <form role="form" class="page-main__content-inner" name="createTask" novalidate>
 
 <div class="page-main__content-inner_validation-form">
-      <div class="text-box" ng-class="{'has-error': !createTask.$pristine && verifyName()}">
-       <!-- && submitted && createTask.taskName.$invalid -->
+      <div class="text-box" ng-class="{'has-error': !createTask.$pristine && verifyTaskName()}">
           <label class="text-box__label" for="taskName">task name</label>
           <input class="text-box__control" id="taskName" type="text" name="taskName" ng-model="name" ng-minlength="2" required>
 
-          <div class="text-box__label error-message" ng-if="requestMessage">
+          <div class="text-box__label error-message" ng-if="!!requestMessage">
             {{requestMessage}}
           </div>
 
           <div class="text-box__label"
-            ng-class="{'error-message': verifyName()}"
+            ng-class="{'error-message': verifyTaskName()}"
             ng-if="createTask.taskName.$error.required && submitted">
-             <!-- createTask.taskName.$invalid && submitted -->
               This field is required
           </div>
           <div class="text-box__label"
-            ng-class="{'error-message': verifyName()}"
+            ng-class="{'error-message': verifyTaskName()}"
             ng-if="createTask.taskName.$error.minlength && submitted">
-             <!-- createTask.taskName.$invalid && submitted -->
               Too short name of task
           </div>
       </div>
 
-      <div class="text-box">
+      <div class="text-box" ng-class="{'has-error': !createTask.$pristine && submitted && !verifyTaskProject()}">
           <label class="text-box__label" for="selectProject">project</label>
           <select class="text-box__control drop-down" id="selectProject" name="selectProject" ng-model="selectProject" required>
             <option ng-repeat="project in projects">{{project.name}}</option>
           </select>
 
           <div class="text-box__label"
-            ng-class="{'error-message': verifyName()}"
-            ng-if="createTask.taskName.$error.required && submitted">
+            ng-class="{'error-message': !verifyTaskProject()}"
+            ng-if="submitted && !verifyTaskProject()">
               This field is required
           </div>
       </div>
@@ -41,28 +38,28 @@
           <button class="button__new-task" ng-click="setTodayDate()">Today</button>
           <button class="button__new-task" ng-click="setTomorrowDate()">Tomorrow</button>
           <button class="button__new-task" ng-click="setDate()">Pick date</button>
+
+          <div class="text-box__label"
+            ng-class="{'error-message': !verifyTaskDate()}"
+            ng-if="submitted && !verifyTaskDate()">
+              Choose a date
+          </div>
       </div>
 
       <div class="text-box text-box_half">
           <label class="text-box__label" for="timeNotification">time</label>
-          <input class="text-box__control" id="timeNotification" name="timeNotification" type="text">
+          <input class="text-box__control" id="timeNotification" name="timeNotification" type="text" ng-pattern="/([0-2]{1}\d{1}):([0-5]{1}\d{1})/" required>
       </div>
 
       <div class="button-container">
         <button class="button__new-task" type="reset" ng-click="reset()">Cancel</button>
-        <!-- submitted = false; createTask.$pristine = true -->
         <button class="button__new-task">Add Next</button>
         <button class="button__new-task" type="submit"
           ng-class="{'disabled': isSubmitDisabled()}"
           ng-disabled="isSubmitDisabled()"
           ng-click="submit()"
         >OK</button>
-        <!-- ng-click="sendTask()" -->
 
-      </div>
-
-      <div class="button-contain">
-        <button class="button__new-task" ng-click="showSelectedProject()">Selected Project</button>
       </div>
 </div>
 
