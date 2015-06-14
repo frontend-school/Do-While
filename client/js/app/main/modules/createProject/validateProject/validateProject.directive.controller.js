@@ -26,7 +26,7 @@ module.exports = function ($scope, projectService) {
 
   $scope.checkProjects = function () {
 
-    if (projectService.editedProject.id) {
+    if (!!projectService.editedProject.id) {
       projectService.editProject({
         id: projectService.editedProject.id,
         name: $scope.name,
@@ -49,7 +49,6 @@ module.exports = function ($scope, projectService) {
     if ($scope.requestStatus === 'success') {
       func(arg.data.data);
       $scope.reset();
-      $scope.requestMessage = '';
     } else {
       $scope.requestMessage = arg.data.message;
     }
@@ -81,14 +80,18 @@ module.exports = function ($scope, projectService) {
   };
 
   $scope.isSubmitDisabled = function () {
-    return ($scope.verifyColor() && !$scope.createProject.$pristine && $scope.createProject.$invalid);
+    return $scope.verifyColor() &&
+           !$scope.createProject.$pristine &&
+           $scope.createProject.$invalid;
   };
 
   $scope.submit = function () {
     $scope.submitted = true;
     $scope.createProject.$pristine = false;
 
-    !($scope.color === undefined) && $scope.createProject.$valid && $scope.checkProjects();
+    !($scope.color === undefined) &&
+    $scope.createProject.$valid &&
+    $scope.checkProjects();
   };
 
 };
