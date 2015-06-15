@@ -48,3 +48,10 @@
   text-align: left;
   color: orange;
 }
+.success-message {
+  margin-top: 3px;
+  @include font-bold(8px);
+  text-transform: uppercase;
+  text-align: left;
+  color: green;
+}

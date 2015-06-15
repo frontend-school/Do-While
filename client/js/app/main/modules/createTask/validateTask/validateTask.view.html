@@ -37,7 +37,13 @@
       <div class="button-container">
           <button class="button__new-task" ng-click="setTodayDate()">Today</button>
           <button class="button__new-task" ng-click="setTomorrowDate()">Tomorrow</button>
-          <button class="button__new-task" ng-click="setDate()">Pick date</button>
+          <input class="button__pick-date" type="datetime-local" ng-model="setTaskDate">
+
+          <div class="text-box__label"
+            ng-class="{'success-message': !!setTaskDate}"
+            ng-if="!!setTaskDate">
+              {{setTaskDate | date:'yyyy MMM d'}}
+          </div>
 
           <div class="text-box__label"
             ng-class="{'error-message': !verifyTaskDate()}"
@@ -48,7 +54,13 @@
 
       <div class="text-box text-box_half">
           <label class="text-box__label" for="timeNotification">time</label>
-          <input class="text-box__control" id="timeNotification" name="timeNotification" type="text" ng-pattern="/([0-2]{1}\d{1}):([0-5]{1}\d{1})/" required>
+          <input class="text-box__control" id="timeNotification" name="timeNotification" type="text" pattern="^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$">
+
+          <div class="text-box__label"
+            ng-class="{'error-message': $scope.createTask.timeNotification.$invalid}"
+            ng-if="submitted && $scope.createTask.timeNotification.$invalid">
+              Type in correct time
+          </div>
       </div>
 
       <div class="button-container">
