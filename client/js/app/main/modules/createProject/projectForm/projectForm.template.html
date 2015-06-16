@@ -1,0 +1,68 @@
+<form name="form" class="page-main__content-inner" novalidate>
+
+    <div class="page-main__content-inner_validation-form">
+        <div class="text-box" ng-class="{'has-error': form.$submitted && form.name.$invalid}">
+            <label class="text-box__label" for="name">
+                project name
+            </label>
+
+            <input class="text-box__control" id="name" type="text"
+                   name="name"
+                   ng-model="model.name"
+                   ng-minlength="2"
+                   required/>
+
+            <div class="text-box__label error-message" ng-if="project.error.name">
+                {{model.error.name}}
+            </div>
+
+            <div class="text-box__label error-message"
+                 ng-if="form.$submitted && form.name.$error.required">
+                Required
+            </div>
+
+            <div class="text-box__label error-message"
+                 ng-if="form.$submitted && form.name.$error.minlength">
+                Too short
+            </div>
+        </div>
+
+        <div class="text-box">
+            <div class="text-box__label" ng-class="{'has-error': form.$submitted && !model.color}">
+                project color
+            </div>
+
+            <div class="text-box__label error-message"
+                 ng-if="form.$submitted && !model.color">
+                Choose the color
+            </div>
+
+            <div class="text-box__label error-message"
+                 ng-if="model.error.color">
+                {{model.error.color}}
+            </div>
+
+            <dw-color-picker selected="model.color">
+            </dw-color-picker>
+        </div>
+
+        <div class="button-container">
+            <button class="button__new-task" type="reset"
+                    ng-click="onReset(form)">
+                Cancel
+            </button>
+
+            <button class="button__new-task"
+                    type="submit"
+                    ng-class="{'disabled': form.$dirty && form.$invalid}"
+                    ng-disabled="form.$dirty && form.$invalid"
+                    ng-click="onSubmit(form)">
+                OK
+            </button>
+
+            <pre>
+                input: {{model | json}}
+            </pre>
+        </div>
+    </div>
+</form>

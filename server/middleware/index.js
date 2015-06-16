@@ -11,7 +11,8 @@ module.exports = function (app) {
         .use(bodyParser.urlencoded({extended: false}))
         .use(methodOverride())
         .use(require('./queryJsonParser'))
-        .use(require('./queryIsExpand'));
+        .use(require('./queryIsExpand'))
+        .use(require('./responseSendWithStatusDecorator'));
 
     require('./passport')(app);
 };

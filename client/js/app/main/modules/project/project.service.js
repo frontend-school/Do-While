@@ -1,53 +1,65 @@
-var project = require('./project.events');
+var projectEvents = require('./project.events');
 
 /**
  * @ngInject
  */
-module.exports = function ($http, apiConfig, $rootScope) {
+module.exports = function ($q, $http, apiConfig, $rootScope) {
 
-    this.editedProject = {
-        id: '',
-        name: '',
-        color: ''
+    var resourceUrl = apiConfig.basePath + '/projects';
+
+    return {
+        getAll: getAll,
+        getById: getById,
+        create: create,
+        update: update,
+        remove: remove
     };
 
-    this.projects = [];
+    function getAll(isExpandTasks) {
+        var query = {};
+        if (isExpandTasks) {
+            query.expand = 'tasks'
+        }
+        return immutableRequest($http.get(resourceUrl, {
+            query: query
+        }));
+    }
 
-    this.newProjectAdded = function (item) {
-        $rootScope.$emit(project.create, item);
-    };
+    function getById(id, isExpandTasks) {
+        var query = {};
+        if (isExpandTasks) {
+            query.expand = 'tasks'
+        }
+        return immutableRequest($http.get(resourceUrl + '/' + id, {
+            query: query
+        }));
+    }
 
-    this.projectEdited = function (item) {
-        $rootScope.$emit(project.edit, item);
-    };
+    function create(project) {
+        return mutableRequest($http.post(resourceUrl, project))
+    }
 
-    this.getById = function (id) {
-        return $http.get('/api/projects/' + id);
-    };
+    function update(id, project) {
+        return mutableRequest($http.put(resourceUrl + '/' + id, project));
+    }
 
-    this.getTasks = function (id) {
-        return $http.get(apiConfig.basePath + '/projects/' + id + '/tasks.json');
-    };
+    function remove(id, project) {
+        return mutableRequest($http.delete(resourceUrl + '/' + id, project));
+    }
 
-    this.createProject = function (project) {
-        return $http.post('/api/projects', { name: project.name, color: project.color });
-    };
+    function mutableRequest(httpPromise) {
+        return immutableRequest(httpPromise).then(function (project) {
+            $rootScope.$emit(projectEvents.changed);
+            return project;
+        });
+    }
 
-    this.editProject = function (project) {
-        return $http.post('/api/projects/edit', {id: project.id, name: project.name, color: project.color });
-    };
+    function immutableRequest(httpPromise) {
+        var d = $q.defer();
+        httpPromise
+            .success(d.resolve.bind(d))
+            .error(d.reject.bind(d));
 
-    this.createTask = function (project) {
-        return $http.post('/api/tasks', {
-                    projectId: project.projectId,
-                    name: project.name,
-                    date: project.date,
-                    notificationTime: project.notificationTime,
-                    accessTime: project.accessTime
-                });
-    };
-
-    this.getAllProjects = function () {
-        return $http.get('/api/projects');
-    };
+        return d.promise;
+    }
 };

@@ -1,4 +1,4 @@
 /*@ngInject*/
 module.exports = function ($state) {
-    $state.go('main.today');
+    //$state.go('main.today');
 };

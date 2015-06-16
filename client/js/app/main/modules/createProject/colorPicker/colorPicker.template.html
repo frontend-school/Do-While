@@ -1,0 +1,8 @@
+<div class="colored-wrapper">
+    <span ng-repeat="color in colorPicker.colors"
+          dw-color="color"
+          class="colored-blocks"
+          ng-click="colorPicker.select(color)"
+          ng-class="{'colored-blocks_hovered': colorPicker.isSelected(color)}">
+    </span>
+</div>
