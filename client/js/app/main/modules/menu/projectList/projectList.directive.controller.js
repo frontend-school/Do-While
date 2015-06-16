@@ -17,7 +17,6 @@ module.exports = function (projectService, $rootScope) {
         projectService
             .getAll()
             .then(function (response) {
-                console.log(response);
                 vm.items = response;
             });
     }
