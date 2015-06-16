@@ -2,5 +2,65 @@
     add new project
 </dw-task-header>
 
-<dw-project-form model="project.input" on-submit="project.submit" on-reset="project.reset">
-</dw-project-form>
+<form name="form" class="page-main__content-inner" novalidate>
+
+    <div class="page-main__content-inner_validation-form">
+        <div class="text-box" ng-class="{'has-error': form.$submitted && (form.name.$invalid || error.name)}">
+            <label class="text-box__label" for="name">
+                project name
+            </label>
+
+            <input class="text-box__control" id="name" type="text"
+                   name="name"
+                   ng-model="input.name"
+                   ng-minlength="2"
+                   required/>
+
+            <div class="text-box__label error-message" ng-if="error.name">
+                {{error.name}}
+            </div>
+
+            <div class="text-box__label error-message"
+                 ng-if="form.$submitted && form.name.$error.required">
+                Required
+            </div>
+
+            <div class="text-box__label error-message"
+                 ng-if="form.$submitted && form.name.$error.minlength">
+                Too short
+            </div>
+        </div>
+
+        <div class="text-box">
+            <div class="text-box__label" ng-class="{'has-error': form.$submitted && (form.color.$invalid || error.color)}">
+                project color
+            </div>
+
+            <div class="text-box__label error-message"
+                 ng-if="form.$submitted && form.color.$error.required">
+                Choose the color
+            </div>
+
+            <div class="text-box__label error-message"
+                 ng-if="error.color">
+                {{error.color}}
+            </div>
+
+            <dw-color-picker selected="input.color">
+            </dw-color-picker>
+        </div>
+
+        <div class="button-container">
+            <button class="button__new-task" type="reset"
+                    ng-click="reset()">
+                Cancel
+            </button>
+
+            <button class="button__new-task"
+                    type="submit"
+                    ng-click="submit()">
+                OK
+            </button>
+        </div>
+    </div>
+</form>

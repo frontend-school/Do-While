@@ -1,23 +1,71 @@
-var angular = require('angular');
+var extend = require('angular').extend;
 
 /*
  * @ngInject
  * */
-module.exports = function (projectService) {
-    var vm = this;
+module.exports = function ($scope, projectService, $state) {
 
-    angular.extend(vm, {
+    extend($scope, {
+        error: {},
         input: {
-            name: '',
-            color: null
+            color: '',
+            name: ''
+        },
+
+        /*methods*/
+        submit: submit,
+        reset: reset
+    });
+
+    /* watchers */
+
+    $scope.$watch('input.name', function () {
+        if ($scope.error) {
+            delete $scope.error.name;
         }
     });
 
-    vm.submit = function (form) {
-        console.log(form);
-    };
+    $scope.$watch('input.color', function () {
+        if ($scope.error) {
+            delete $scope.error.color;
+        }
+    });
 
-    vm.reset = function (form) {
-        console.log(form);
-    };
+    /* internals */
+
+    function submit() {
+        if (isFromInvalid()) {
+            return;
+        }
+
+        projectService
+            .create($scope.input)
+            .then(onProjectCreated)
+            .catch(onError);
+
+        /*internals*/
+
+        function isFromInvalid() {
+            return $scope.form.$invalid || $scope.error.color || $scope.error.name;
+        }
+
+        function onProjectCreated(project) {
+            $state.transitionTo('main.project', {
+                projectId: project._id
+            });
+        }
+
+        function onError(error) {
+            $scope.error = error.messages.reduce(function (error, message) {
+                error[message.field] = message.message;
+                return error;
+            }, {});
+        }
+    }
+
+    function reset() {
+        $scope.input.color = null;
+        $scope.input.name = null;
+        $scope.form.reset();
+    }
 };
