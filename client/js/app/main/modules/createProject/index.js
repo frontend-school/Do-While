@@ -1,8 +1,6 @@
-var angular = require('angular');
-
-var createModule = angular.module('createModule', [
-    require('./validateProject'),
-  ])
-    .config(require('./createProject.config'));
-
-module.exports = createModule.name;
+module.exports = require('angular')
+    .module('createModule', [
+    ])
+    .directive('dwColorPicker', require('./colorPicker/colorPicker.directive'))
+    .config(require('./createProject.config'))
+    .name;

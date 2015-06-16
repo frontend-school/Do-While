@@ -1,181 +1,147 @@
 var express = require('express'),
-  router = express.Router(),
-  Project = require('../../models/projects'),
-  Tasks = require('../../models/tasks');
+    router = express.Router(),
+    Task = require('../../models/task');
 
-router.get('/', function(req, res) {
+router.param('taskId', function (req, res, next, taskId) {
 
-  var todayDate, startDate, endDate, projectIds;
+    var tasksQ = Task.findById(taskId);
+    var isExpandProject = req.query.isExpand('project');
 
-  todayDate = new Date();
-
-  startDate = new Date(todayDate);
-  startDate.setHours(0);
-  startDate.setMinutes(0);
-  startDate.setSeconds(0);
-  endDate = new Date(todayDate);
-  endDate.setHours(23);
-  endDate.setMinutes(59);
-  endDate.setSeconds(59);
-
-  Tasks.find({
-    date: {
-      $gte: startDate,
-      $lt: endDate
-    }
-  }, function(err, findedTasks) {
-    if (err) {
-      res.status(500).send(err);
-      return;
+    if (isExpandProject) {
+        tasksQ = tasksQ.populate('project');
     }
 
-    projectIds = findedTasks.map(function(item) {
-      return item.projectId;
-    });
-
-    var arrayModifyedTasks = [];
-
-    Project.find({
-      _id: {
-        $in: projectIds
-      }
-    }, function(err, data) {
-
-        var modifyedTask;
-        findedTasks.forEach(function(item) {
-          modifyedTask = {
-            project: {}
-          };
-          modifyedTask._id = item._id;
-          modifyedTask.accessTime = item.accessTime;
-          modifyedTask.date = item.date;
-          modifyedTask.isReady = item.isReady;
-          modifyedTask.name = item.name;
-          modifyedTask.notificationTime = item.notificationTime;
-          modifyedTask.project._id = item.projectId;
-
-          for (var j = 0; j < data.length; j++) {
-            if (item.projectId == data[j]._id) {
-              modifyedTask.project.color = data[j].color;
-              modifyedTask.project.name = data[j].name;
+    tasksQ
+        .exec(function (err, task) {
+            if (err) {
+                return next(err);
             }
-          }
 
-          arrayModifyedTasks.push(modifyedTask);
+            if (!task) {
+                return res.notFound();
+            }
+
+            req.task = task;
+
+            next();
         });
-
-        res.json({
-          data: arrayModifyedTasks
-        });
-
-    });
-
-  });
-
 });
 
-router.get('/week', function(req, res) {
+router.get('/', function (req, res, next) {
 
-  var todayDate, startDate, endDate, projectIds;
+    var qParams = {};
 
-  todayDate = new Date();
+    var fromDate = new Date(req.query.fromDate);
+    var toDate = new Date(req.query.toDate);
 
-  startDate = new Date(todayDate);
-  startDate.setHours(0);
-  startDate.setMinutes(0);
-  startDate.setSeconds(0);
-  endDate = new Date(todayDate);
-  endDate.setDate(startDate.getDate() + 6);
-  endDate.setHours(23);
-  endDate.setMinutes(59);
-  endDate.setSeconds(59);
-
-  Tasks.find({
-    date: {
-      $gte: startDate,
-      $lt: endDate
-    }
-  }, function(err, findedTasks) {
-    if (err) {
-      res.status(500).send(err);
-      return;
+    if (!isNaN(fromDate)) {
+        qParams.date = {};
+        qParams.date.$ge = resetTime(fromDate).toISOString();
     }
 
-    projectIds = findedTasks.map(function(item) {
-      return item.projectId;
-    });
+    if (!isNaN(toDate)) {
+        qParams.date = qParams.date || {};
+        qParams.date.$le = addDay(resetTime(toDate)).toISOString();
+    }
 
-    var arrayModifyedTasks = [];
+    var tasksQ = Task.find(qParams);
 
-    Project.find({
-      _id: {
-        $in: projectIds
-      }
-    }, function(err, data) {
+    if (req.query.isExpand('project')) {
+        tasksQ = tasksQ.populate('project');
+    }
 
-        var modifyedTask;
-        findedTasks.forEach(function(item) {
-          modifyedTask = {
-            project: {}
-          };
-          modifyedTask._id = item._id;
-          modifyedTask.accessTime = item.accessTime;
-          modifyedTask.date = item.date;
-          modifyedTask.isReady = item.isReady;
-          modifyedTask.name = item.name;
-          modifyedTask.notificationTime = item.notificationTime;
-          modifyedTask.project._id = item.projectId;
-
-          for (var j = 0; j < data.length; j++) {
-            if (item.projectId == data[j]._id) {
-              modifyedTask.project.color = data[j].color;
-              modifyedTask.project.name = data[j].name;
+    tasksQ
+        .exec(function (err, tasks) {
+            if (err) {
+                return next(err);
             }
-          }
-
-          arrayModifyedTasks.push(modifyedTask);
+            res.ok(tasks);
         });
-
-        res.json({
-          data: arrayModifyedTasks
-        });
-
-    });
-
-  });
-
 });
 
-router.post('/', function(req, res) {
+router.get('/:taskId', function (req, res) {
+    res.json(req.task);
+});
 
-  var newTask,
-    statusOfAction = {
-      status: '',
-      message: '',
-      data: {}
+router.put('/:taskId', function (req, res, next) {
+
+    validateTask(req.task)
+        .then(function (task) {
+            return Q(task.save());
+        })
+        .then(function (task) {
+            res.ok(task);
+        })
+        .catch(function (error) {
+            if (error instanceof ValidationError) {
+                res.badRequest(error.messages);
+            } else {
+                next(error);
+            }
+        });
+});
+
+router.delete('/:taskId', function (req, res, next) {
+    Q(req.task.remove())
+        .then(function () {
+            res.ok();
+        })
+        .catch(next);
+});
+
+function validateTask(task) {
+    var d = Q.defer(),
+        error = new ValidatorError();
+
+    if (!task.name) {
+        error.addMessage('name', 'required');
+    }
+    if (!task.color) {
+        error.addMessage('color', 'required');
+    }
+
+    task.date = new Date(task.date);
+
+    if (isNaN(task.date.valueOf())) {
+        error.addMessage('date', 'invalid');
+    }
+
+    if (error.hasMessages()) {
+        d.reject(error);
+        return d.promise;
+    }
+
+    var qParams = {
+        name: task.name
     };
 
-  newTask = Tasks({
-    projectId: req.body.projectId,
-    name: req.body.name,
-    date: req.body.date,
-    notificationTime: '',
-    accessTime: '',
-    isReady: false
-  });
-
-  newTask.save(function(err) {
-    if (err) {
-      statusOfAction.status = 'error';
-      statusOfAction.message = 'can\'t save in db';
-      res.status(500).send(statusOfAction);
-      return;
-    } else {
-      statusOfAction.status = 'success';
-      res.send(statusOfAction);
+    if (task._id) {
+        qParams._id = {
+            $ne: task._id
+        };
     }
-  });
 
-});
+    return Q(Task.count(qParams))
+        .then(function (isNameExists) {
+            if (isNameExists) {
+                error.addMessage('name', 'exists');
+                throw error;
+            }
+            return task;
+        });
+}
+
+function resetTime(date) {
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+    return date;
+}
+
+function addDay(date) {
+    var millisecondsInDay = 24 * 60 * 60 * 1000;
+    return new Date(date.valueOf() + millisecondsInDay);
+}
 
 module.exports = router;

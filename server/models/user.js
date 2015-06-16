@@ -1,9 +1,7 @@
-var db = require('./../bootstrap/db.connection.js'),
-    Schema = db.mongoose.Schema;
+var db = require('./../bootstrap/db.js'),
+    Schema = require('mongoose').Schema;
 
-const USER_MODEL_NAME = 'users';
-
-var UserSchema = Schema({
+var userSchema = Schema({
     accounts: [{type: Schema.ObjectId, ref: 'accounts'}],
     name: String,
     email: String,
@@ -11,4 +9,4 @@ var UserSchema = Schema({
     access_token: String
 });
 
-module.exports = db.connection.model(USER_MODEL_NAME, UserSchema);
+module.exports = db.model('users', userSchema);

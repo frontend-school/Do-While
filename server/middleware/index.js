@@ -4,10 +4,15 @@ var logger = require('morgan'),
     methodOverride = require('method-override');
 
 module.exports = function (app) {
-    app.use(logger('dev'));
-    app.use(cookieParser());
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: false}));
-    app.use(methodOverride());
+    app
+        .use(logger('dev'))
+        .use(cookieParser())
+        .use(bodyParser.json())
+        .use(bodyParser.urlencoded({extended: false}))
+        .use(methodOverride())
+        .use(require('./queryJsonParser'))
+        .use(require('./queryIsExpand'))
+        .use(require('./responseSendWithStatusDecorator'));
+
     require('./passport')(app);
 };

@@ -1,15 +1,16 @@
-var db = require('./../bootstrap/db.connection.js');
+var db = require('./../bootstrap/db.js'),
+    Schema = require('mongoose').Schema;
 
-var AccountEmailSchema = db.mongoose.Schema({
+var accountEmailSchema = Schema({
     type: String,
     value: String
 });
 
-var AccountSchema = db.mongoose.Schema({
+var accountSchema = Schema({
     providerId: String,
     provider: String,
-    _user: {type: db.mongoose.Schema.ObjectId, ref: 'users'},
-    emails: [AccountEmailSchema]
+    _user: {type: Schema.ObjectId, ref: 'users'},
+    emails: [accountEmailSchema]
 });
 
-module.exports = db.connection.model('accounts', AccountSchema);
+module.exports = db.model('accounts', accountSchema);

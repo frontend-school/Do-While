@@ -1,22 +1,21 @@
+var angular = require('angular');
 /**
  * @ngInject
  */
 module.exports = function ($stateParams, projectService) {
     var vm = this;
-    vm.tasks = [];
 
-    var id = $stateParams.projectId;
+    angular.extend(vm, {
+        name: '',
+        color: '',
+        tasks: []
+    });
 
-    projectService.getById(id)
-        .success(function (project) {
-            vm.color = project.data.color;
-            vm.name = project.data.name;
-            vm.tasks = project.data.tasks;
+    projectService
+        .getById($stateParams.projectId, true)
+        .then(function (project) {
+            vm.color = project.color;
+            vm.name = project.name;
+            vm.tasks = project.tasks;
         });
-
-    vm.setProjectId = function () {
-      projectService.editedProject.id = id;
-      projectService.editedProject.name = vm.name;
-      projectService.editedProject.color = vm.color;
-    };
 };
