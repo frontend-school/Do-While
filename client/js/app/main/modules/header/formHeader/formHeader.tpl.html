@@ -1,4 +1,4 @@
-<header class="header color_default">
+<header class="header" dw-color="color" ng-class="{header_colored: !!color}">
     <a role="button" ng-click="header.toggleMenuVisibility()" class="header-button header-button_left">
         <span class="header__menu-button"></span>
     </a>
@@ -7,6 +7,6 @@
     </div>
 
     <a ui-sref="main.today" class="header-button header-button_right">
-        <span class="header__close-new-task"></span>
+        <span class="header__close-button"></span>
     </a>
 </header>
