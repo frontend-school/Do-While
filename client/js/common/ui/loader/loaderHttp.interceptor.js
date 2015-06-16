@@ -1,19 +1,17 @@
 /*@ngInject*/
-module.exports = function (loaderService) {
+module.exports = function ($q, loaderService) {
     return {
-        request: passWithStart,
-        requestError: passWithFinish,
-        response: passWithFinish,
-        responseError: passWithFinish
+        request: function (req) {
+            loaderService.start();
+            return req;
+        },
+        response: function (res) {
+            loaderService.finish();
+            return res;
+        },
+        responseError: function (reason) {
+            loaderService.finish();
+            return $q.reject(reason);
+        }
     };
-
-    function passWithStart(pass) {
-        loaderService.start();
-        return pass;
-    }
-
-    function passWithFinish(pass) {
-        loaderService.finish();
-        return pass;
-    }
 };
