@@ -4,12 +4,14 @@ var extend = require('angular').extend;
  * @ngInject
  * */
 module.exports = function () {
-    return function (scope, onSubmit) {
+    return function (scope, onSubmit, project) {
+        var input = project || {
+                color: null,
+                name: null
+            };
+
         extend(scope, {
-            input: {
-                color: '',
-                name: ''
-            },
+            input: input,
             error: {}
         });
 

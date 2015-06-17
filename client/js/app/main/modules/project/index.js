@@ -1,8 +1,7 @@
-var angular = require('angular');
-
-var projectModule = angular.module('projectModule', [])
-    .service('projectService', require('./project.service'))
-    .directive('dwProjectTaskItem', require('./projectTaskItem.directive'))
-    .config(require('./project.config.js'));
-
-module.exports = projectModule.name;
+module.exports = require('angular')
+    .module('projectModule', [
+        require('./components')
+    ])
+    .config(require('./project.config'))
+    .factory('projectService', require('./project.service'))
+    .name;

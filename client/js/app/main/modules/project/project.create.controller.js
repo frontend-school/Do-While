@@ -1,8 +1,4 @@
-var extend = require('angular').extend;
-
-/*
- * @ngInject
- * */
+/*@ngInject*/
 module.exports = function ($scope, projectForm, projectService, $state) {
 
     projectForm($scope, onSubmit);
@@ -11,7 +7,6 @@ module.exports = function ($scope, projectForm, projectService, $state) {
         return projectService
             .create(project)
             .then(function (project) {
-                console.log(project);
                 $state.transitionTo('main.project', {
                     projectId: project._id
                 });
