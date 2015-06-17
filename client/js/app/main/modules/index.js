@@ -8,6 +8,5 @@ module.exports = [
 
     require('./project'),
     require('./today'),
-    require('./week'),
-    require('./createProject')
+    require('./week')
 ];

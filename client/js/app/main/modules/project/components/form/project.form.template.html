@@ -1,7 +1,3 @@
-<dw-task-header>
-    add new project
-</dw-task-header>
-
 <form name="form" class="page-main__content-inner" novalidate>
 
     <div class="page-main__content-inner_validation-form">
@@ -32,7 +28,8 @@
         </div>
 
         <div class="text-box">
-            <div class="text-box__label" ng-class="{'has-error': form.$submitted && (form.color.$invalid || error.color)}">
+            <div class="text-box__label"
+                 ng-class="{'has-error': form.$submitted && (form.color.$invalid || error.color)}">
                 project color
             </div>
 
@@ -63,4 +60,5 @@
             </button>
         </div>
     </div>
+
 </form>

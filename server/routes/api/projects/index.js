@@ -85,7 +85,7 @@ router.put('/:projectId', function (req, res, next) {
             }, {
                 name: project.name,
                 color: project.color
-            }, function (err, project) {
+            }, function (err) {
                 if (err)
                     throw err;
                 res.ok(project);

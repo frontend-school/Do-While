@@ -37,7 +37,7 @@ $header-text-color: $gray-scale-4;
 
   &__menu-button,
   &__add-task-button,
-  &__close-new-task {
+  &__close-button {
     display: block;
     position: relative;
 
@@ -54,7 +54,7 @@ $header-text-color: $gray-scale-4;
   }
 
   &__add-task-button,
-  &__close-new-task {
+  &__close-button {
 
     &::after {
       content: '';
@@ -69,15 +69,13 @@ $header-text-color: $gray-scale-4;
   }
 
   &__menu-button {
-
     &::before {
       box-shadow: 0 8px 0 0 $gray-scale-4,
-                  0 -8px 0 0 $gray-scale-4;
+      0 -8px 0 0 $gray-scale-4;
     }
   }
 
-  &__close-new-task {
-
+  &__close-button {
     &::before,
     &::after {
       transform: rotate(45deg);
@@ -111,16 +109,21 @@ $header-text-color: $gray-scale-4;
   &_colored {
     .header {
       &__menu-button {
-
         &::before {
           background: white;
           box-shadow: 0 8px 0 0 white,
-                      0 -8px 0 0 white;
+          0 -8px 0 0 white;
         }
       }
 
       &__add-task-button {
+        &::before,
+        &::after {
+          background: white;
+        }
+      }
 
+      &__close-button {
         &::before,
         &::after {
           background: white;

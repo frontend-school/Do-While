@@ -8,7 +8,7 @@ module.exports = function () {
             selectedColor: '=selected'
         },
         bindToController: true,
-        controller: require('./colorPicker.directive.controller'),
+        controller: require('./colorPicker.directive.controller.js'),
         controllerAs: 'colorPicker',
         templateUrl: 'colorPicker.template.html'
     };
